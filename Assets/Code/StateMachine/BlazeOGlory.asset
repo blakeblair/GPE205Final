@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a6119361379044aa32a0979179865a, type: 3}
   m_Name: BlazeOGlory
   m_EditorClassIdentifier: 
-  teamwork: 0
+  teamwork: 0.5
   cowardice: 0
-  aggro: 0
+  aggro: 1

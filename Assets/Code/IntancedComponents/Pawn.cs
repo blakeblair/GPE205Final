@@ -17,9 +17,11 @@ public abstract class Pawn : MonoBehaviour
     
     public abstract void Shoot();
     
-    public abstract void Move(float verticalInput);
+    public abstract void HullMove(float verticalInput);
 
-    public abstract void Rotate(float horizontalInput);
+    public abstract void HullRotate(float horizontalInput);
+    
+    public abstract void TurretRotate(float horizontalInput);
     
     public abstract void MakeNoise();
     

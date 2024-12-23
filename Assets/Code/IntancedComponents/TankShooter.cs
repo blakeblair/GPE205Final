@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankShooter : MonoBehaviour
+public class TankShooter : Shooter
 {
+    public Transform gunTube;
+    public GameObject bulletPrefab;
     // Start is called before the first frame update
     void Start()
     {

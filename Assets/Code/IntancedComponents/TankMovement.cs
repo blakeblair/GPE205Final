@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TankMovement : Movement
 {
+    public Transform turret;
+    public float verticalInput;
+    public float horizontalInput;
+
     public override void Start()
     {
         

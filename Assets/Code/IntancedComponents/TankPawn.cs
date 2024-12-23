@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(TankMovement))]
+[RequireComponent(typeof(TankShooter))]
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Health))]
+//[RequireComponent(typeof(NoiseMaker))]
+
 public class TankPawn : Pawn
 {
     public float speed = 10;
@@ -15,20 +22,35 @@ public class TankPawn : Pawn
     public float fireRate = 1;
     private float nextFireTime = 0;
 
+    private void Awake()
+    {
+        Health = GetComponent<Health>();
+        Shooter = GetComponent<TankShooter>();
+        Movement = GetComponent<TankMovement>();
 
+        //TankAudio = GetComponent<TankAudio>();
+        //NoiseMaker = GetComponent<NoiseMaker>();
+        //PowerupManager = GetComponent<PowerupManager>();
+    }
+    
     public override void Shoot()
     {
         throw new System.NotImplementedException();
     }
 
-    public override void Move(float verticalInput)
+    public override void HullMove(float verticalInput)
     {
         transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
     }
 
-    public override void Rotate(float horizontalInput)
+    public override void HullRotate(float horizontalInput)
     {
         transform.Rotate(Vector3.up * horizontalInput * rotationSpeed * Time.deltaTime);
+    }
+    
+    public override void TurretRotate(float horizontalInput)
+    {
+        RotateTurret(horizontalInput);
     }
 
     public override void MakeNoise()
