@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6981357772363480947}
   - component: {fileID: 9068883845360585025}
   - component: {fileID: 1834111436171968088}
-  - component: {fileID: 1428582485095218697}
   m_Layer: 0
   m_Name: ObstacleWall (1)
   m_TagString: Untagged
@@ -106,20 +105,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1428582485095218697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276312004562589422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &305208621043182213
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +414,6 @@ GameObject:
   - component: {fileID: 932728903489398108}
   - component: {fileID: 8816561567465939590}
   - component: {fileID: 1181131788950338831}
-  - component: {fileID: 466978904067549069}
   m_Layer: 0
   m_Name: ObstacleWall (15)
   m_TagString: Untagged
@@ -523,20 +507,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &466978904067549069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763898043357252495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &957338276929005645
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +652,6 @@ GameObject:
   - component: {fileID: 3618138805560561244}
   - component: {fileID: 6723195454687290675}
   - component: {fileID: 2534683826295060245}
-  - component: {fileID: 970497722620009385}
   m_Layer: 0
   m_Name: ObstacleWall (18)
   m_TagString: Untagged
@@ -776,20 +745,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &970497722620009385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1022451788820308449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &1274583163476375631
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,7 +788,6 @@ GameObject:
   - component: {fileID: 2250931396967984408}
   - component: {fileID: 3945812467217477337}
   - component: {fileID: 169956112746059601}
-  - component: {fileID: 4285453473959097450}
   m_Layer: 0
   m_Name: ObstacleWall (22)
   m_TagString: Untagged
@@ -927,20 +881,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4285453473959097450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486600619289331971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &1645939743125941657
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,7 +921,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7723351135236906980}
-  - component: {fileID: 6311011324986057512}
   m_Layer: 0
   m_Name: Path1
   m_TagString: Untagged
@@ -1014,29 +953,6 @@ Transform:
   - {fileID: 6272502318761441295}
   m_Father: {fileID: 6412182610321385139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6311011324986057512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2508999761444098479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 336cc4e632579a1459e9fa97c39c8e62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 4695604826908771096}
-  - {fileID: 1087587345532807444}
-  - {fileID: 219583897632911064}
-  - {fileID: 7431050855380496307}
-  - {fileID: 6768050986539278906}
-  - {fileID: 7442707121536931408}
-  - {fileID: 8177687713911286735}
-  - {fileID: 3159302139941143145}
-  - {fileID: 4378772480688278052}
-  - {fileID: 6272502318761441295}
 --- !u!1 &2576725584557451700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +965,6 @@ GameObject:
   - component: {fileID: 3923081437732893243}
   - component: {fileID: 2523940538545066459}
   - component: {fileID: 1786485958676256779}
-  - component: {fileID: 3942910625973646935}
   m_Layer: 0
   m_Name: ObstacleWall (6)
   m_TagString: Untagged
@@ -1143,20 +1058,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3942910625973646935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2576725584557451700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &2611342710123647383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,7 +1070,6 @@ GameObject:
   - component: {fileID: 46197957558565926}
   - component: {fileID: 1573117759310732231}
   - component: {fileID: 5769383223375425553}
-  - component: {fileID: 5888013337527195709}
   m_Layer: 0
   m_Name: ObstacleWall (7)
   m_TagString: Untagged
@@ -1263,20 +1163,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5888013337527195709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2611342710123647383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &2685485232908297943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,7 +1241,6 @@ GameObject:
   - component: {fileID: 5069846791739557326}
   - component: {fileID: 8867649172639515301}
   - component: {fileID: 1441451491126170373}
-  - component: {fileID: 242425216541166743}
   m_Layer: 0
   m_Name: ObstacleWall (19)
   m_TagString: Untagged
@@ -1449,20 +1334,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &242425216541166743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2881572281043315533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &2924780750035064564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,7 +1346,6 @@ GameObject:
   - component: {fileID: 1547842082806051905}
   - component: {fileID: 4701305471690863910}
   - component: {fileID: 3556905784269552801}
-  - component: {fileID: 1748540846442402889}
   m_Layer: 0
   m_Name: ObstacleWall (20)
   m_TagString: Untagged
@@ -1569,20 +1439,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1748540846442402889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2924780750035064564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &2972553601109423454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,7 +1482,6 @@ GameObject:
   - component: {fileID: 2616061423019024154}
   - component: {fileID: 3203097783518224841}
   - component: {fileID: 5412009784272882255}
-  - component: {fileID: 4163554942552390257}
   m_Layer: 0
   m_Name: ObstacleWall (13)
   m_TagString: Untagged
@@ -1720,20 +1575,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4163554942552390257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3172828310105134335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &3330600113587130980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2003,7 +1844,6 @@ GameObject:
   - component: {fileID: 5744829974740492969}
   - component: {fileID: 579384157323505503}
   - component: {fileID: 5123162709053958711}
-  - component: {fileID: 5510020972260127591}
   m_Layer: 0
   m_Name: ObstacleWall (14)
   m_TagString: Untagged
@@ -2097,20 +1937,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5510020972260127591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4085661956153777868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &4259982161845979492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,7 +1949,6 @@ GameObject:
   - component: {fileID: 7821295008253966594}
   - component: {fileID: 4020284220518027020}
   - component: {fileID: 484105017853067343}
-  - component: {fileID: 535423564209321643}
   m_Layer: 0
   m_Name: ObstacleWall (12)
   m_TagString: Untagged
@@ -2217,20 +2042,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &535423564209321643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4259982161845979492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &4443096971182953716
 GameObject:
   m_ObjectHideFlags: 0
@@ -2243,7 +2054,6 @@ GameObject:
   - component: {fileID: 7664377129380147503}
   - component: {fileID: 4439401790863933224}
   - component: {fileID: 7477079082761757585}
-  - component: {fileID: 2242503327231676433}
   m_Layer: 0
   m_Name: ObstacleWall (2)
   m_TagString: Untagged
@@ -2337,20 +2147,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2242503327231676433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4443096971182953716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &5586874249223697560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,7 +2292,6 @@ GameObject:
   - component: {fileID: 1081853482383869475}
   - component: {fileID: 7040746193483131553}
   - component: {fileID: 1949597052795974380}
-  - component: {fileID: 7241218587684863036}
   m_Layer: 0
   m_Name: ObstacleWall (4)
   m_TagString: Untagged
@@ -2590,20 +2385,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7241218587684863036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6006681266494466536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &6036128631795528876
 GameObject:
   m_ObjectHideFlags: 0
@@ -2811,7 +2592,6 @@ GameObject:
   - component: {fileID: 6449029311740381955}
   - component: {fileID: 3395403687743629505}
   - component: {fileID: 3474491899561757935}
-  - component: {fileID: 14146295135905180}
   m_Layer: 0
   m_Name: ObstacleWall (17)
   m_TagString: Untagged
@@ -2905,20 +2685,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &14146295135905180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6391234812137020716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &6645083222106245481
 GameObject:
   m_ObjectHideFlags: 0
@@ -3095,7 +2861,6 @@ GameObject:
   - component: {fileID: 8754411104081827604}
   - component: {fileID: 5201988040825755829}
   - component: {fileID: 4972010945390771935}
-  - component: {fileID: 7695220676971294195}
   m_Layer: 0
   m_Name: ObstacleWall
   m_TagString: Untagged
@@ -3189,20 +2954,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7695220676971294195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951165538050599485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &7398440326189829567
 GameObject:
   m_ObjectHideFlags: 0
@@ -3348,7 +3099,6 @@ GameObject:
   - component: {fileID: 794465140968263335}
   - component: {fileID: 7758867160628924631}
   - component: {fileID: 3966589521222477143}
-  - component: {fileID: 6136953407845914950}
   m_Layer: 0
   m_Name: ObstacleWall (3)
   m_TagString: Untagged
@@ -3442,20 +3192,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6136953407845914950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7720185871988896507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &7835488105324749875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3468,7 +3204,6 @@ GameObject:
   - component: {fileID: 8325239725653757077}
   - component: {fileID: 7093866478317586720}
   - component: {fileID: 2167259083957269844}
-  - component: {fileID: 778821984490771655}
   m_Layer: 0
   m_Name: ObstacleWall (9)
   m_TagString: Untagged
@@ -3562,20 +3297,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &778821984490771655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7835488105324749875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &7901654379921506829
 GameObject:
   m_ObjectHideFlags: 0
@@ -3585,7 +3306,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 82422065318528197}
-  - component: {fileID: 3167775018784324609}
   m_Layer: 0
   m_Name: Path2
   m_TagString: Untagged
@@ -3612,23 +3332,6 @@ Transform:
   - {fileID: 5500531942808068333}
   m_Father: {fileID: 6412182610321385139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3167775018784324609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901654379921506829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 336cc4e632579a1459e9fa97c39c8e62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 1439904540492065030}
-  - {fileID: 7664175583242294018}
-  - {fileID: 2699032134841671106}
-  - {fileID: 5500531942808068333}
 --- !u!1 &8029508539920682493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3641,7 +3344,6 @@ GameObject:
   - component: {fileID: 4870250062541486282}
   - component: {fileID: 4567892107921941973}
   - component: {fileID: 6326335853959890795}
-  - component: {fileID: 4984856771452977263}
   m_Layer: 0
   m_Name: ObstacleWall (8)
   m_TagString: Untagged
@@ -3735,20 +3437,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4984856771452977263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8029508539920682493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &8039127040918952182
 GameObject:
   m_ObjectHideFlags: 0
@@ -3894,7 +3582,6 @@ GameObject:
   - component: {fileID: 588231020708398757}
   - component: {fileID: 9094930001225055002}
   - component: {fileID: 7667229159605521931}
-  - component: {fileID: 489795640915191394}
   m_Layer: 0
   m_Name: ObstacleWall (21)
   m_TagString: Untagged
@@ -3988,20 +3675,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &489795640915191394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8046484211493236130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &8127667806762510162
 GameObject:
   m_ObjectHideFlags: 0
@@ -4147,7 +3820,6 @@ GameObject:
   - component: {fileID: 7049883785611932909}
   - component: {fileID: 2649460280370602202}
   - component: {fileID: 4163274086413793392}
-  - component: {fileID: 4413243931519083380}
   m_Layer: 0
   m_Name: ObstacleWall (5)
   m_TagString: Untagged
@@ -4241,20 +3913,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4413243931519083380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8245911341680151070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &8319259998273634699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4267,7 +3925,6 @@ GameObject:
   - component: {fileID: 5498133836025143372}
   - component: {fileID: 3941082826722686637}
   - component: {fileID: 1947054151616710531}
-  - component: {fileID: 7157525288090072650}
   m_Layer: 0
   m_Name: ObstacleWall (10)
   m_TagString: Untagged
@@ -4361,20 +4018,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7157525288090072650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8319259998273634699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &8696641353075607417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4449,7 +4092,6 @@ GameObject:
   - component: {fileID: 3146327287918588131}
   - component: {fileID: 3327715610145266148}
   - component: {fileID: 903329182800624129}
-  - component: {fileID: 5565772286901443613}
   m_Layer: 0
   m_Name: ObstacleWall (11)
   m_TagString: Untagged
@@ -4543,20 +4185,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5565772286901443613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8850798540912572135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
 --- !u!1 &9136690290159011134
 GameObject:
   m_ObjectHideFlags: 0
@@ -4600,7 +4228,6 @@ GameObject:
   - component: {fileID: 2358180913397222692}
   - component: {fileID: 7067852757305114203}
   - component: {fileID: 6066684618495007435}
-  - component: {fileID: 4830661732803446300}
   m_Layer: 0
   m_Name: ObstacleWall (16)
   m_TagString: Untagged
@@ -4694,17 +4321,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4830661732803446300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9192264308773214039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795e57b9dbfc17544a893960c8107258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100

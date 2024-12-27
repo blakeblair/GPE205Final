@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
-{
-    public abstract void Start();
-    
-    //find out what the arguments are for the Move and Rotate functions
-    public abstract void HullMove();
+{ 
+    public abstract void HullMove(float vertical);
 
-    public abstract void HullRotate();
+    public abstract void HullRotate(float horizontal);
     
-    public abstract void TurretRotate();
+    public abstract void TurretRotate(float horizontal);
 }

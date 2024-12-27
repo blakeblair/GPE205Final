@@ -11,10 +11,7 @@ using UnityEngine;
 
 public class TankPawn : Pawn
 {
-    public float speed = 10;
-    public float rotationSpeed = 10;
-    public float turretRotationSpeed = 10;
-    public float turretRotationLimit = 45;
+
     public GameObject turret;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
@@ -35,22 +32,21 @@ public class TankPawn : Pawn
     
     public override void Shoot()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void HullMove(float verticalInput)
     {
-        transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
+        Movement.HullMove(verticalInput);
     }
 
     public override void HullRotate(float horizontalInput)
     {
-        transform.Rotate(Vector3.up * horizontalInput * rotationSpeed * Time.deltaTime);
+        Movement.HullRotate(horizontalInput);
     }
     
     public override void TurretRotate(float horizontalInput)
     {
-        RotateTurret(horizontalInput);
+        Movement.TurretRotate(horizontalInput);
     }
 
     public override void MakeNoise()
@@ -63,17 +59,6 @@ public class TankPawn : Pawn
         
     //}
 
-    public void RotateTurret(float horizontalInput)
-    {
-        turret.transform.Rotate(Vector3.up * horizontalInput * turretRotationSpeed * Time.deltaTime);
-        float angle = turret.transform.localEulerAngles.y;
-        if (angle > 180)
-        {
-            angle -= 360;
-        }
-        angle = Mathf.Clamp(angle, -turretRotationLimit, turretRotationLimit);
-        turret.transform.localEulerAngles = new Vector3(0, angle, 0);
-    }
 
     public void Fire()
     {
