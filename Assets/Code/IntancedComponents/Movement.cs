@@ -9,4 +9,6 @@ public abstract class Movement : MonoBehaviour
     public abstract void HullRotate(float horizontal);
     
     public abstract void TurretRotate(float horizontal);
+
+    public abstract void TurretPitch(float vertical);
 }

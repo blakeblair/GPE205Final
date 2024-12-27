@@ -31,8 +31,8 @@ public class NoiseMaker : MonoBehaviour
 
     private void FixedUpdate()
     {
-        movingVolume = Mathf.Abs(tankMovement.verticalInput) * moveNoiseMultiplier;
-        rotatingVolume = Mathf.Abs(tankMovement.horizontalInput) * rotateNoiseMultiplier;
+        movingVolume = Mathf.Abs(tankMovement.MovementInput.y) * moveNoiseMultiplier;
+        rotatingVolume = Mathf.Abs(tankMovement.MovementInput.x) * rotateNoiseMultiplier;
         shootingVolume = Mathf.Clamp(shootingVolume-0.1f, 0, shootingNoiseMultiplier);
     }
 

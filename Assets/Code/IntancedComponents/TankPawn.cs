@@ -49,6 +49,12 @@ public class TankPawn : Pawn
         Movement.TurretRotate(horizontalInput);
     }
 
+    public override void TurretPitch(float verticalInput)
+    {
+        Movement.TurretPitch(verticalInput);
+    }
+
+
     public override void MakeNoise()
     {
         

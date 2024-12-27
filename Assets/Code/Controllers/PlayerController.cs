@@ -92,36 +92,12 @@ public class PlayerController : Controller
         }
 
         pawn.HullRotate(move.x);
-        pawn.TurretRotate(look.x);
         pawn.HullMove(move.y);
-
-        VerticalRotation(look.y);
+        pawn.TurretRotate(look.x);
+        pawn.TurretPitch(look.y);
     }
 
-    private void VerticalRotation(float y)
-    {
-        var pivot = TankMovement.pivot;
 
-        pivot.transform.rotation *= Quaternion.AngleAxis(y * TankMovement.cameraSpeed * Time.deltaTime, Vector3.right);
-
-        var angles = pivot.transform.localEulerAngles;
-        angles.z = 0;
-
-        var x = angles.x;
-
-        if(x > 180 && x < 340)
-        {
-            x = 340;
-        }
-        else if( x < 180 && x > 40)
-        {
-            x = 40;
-        }
-
-        angles.x = x;
-        pivot.transform.localEulerAngles = angles;
-
-    }
 
     //public void UpdateCursorPosition(Vector3 position)
     //{

@@ -6,9 +6,8 @@ public class TankMovement : Movement
 {
     public Transform pivot;
     public Transform turret;
-    public float verticalInput;
-    public float horizontalInput;
-    public float turretInput;
+    public Vector2 MovementInput;
+    public Vector2 TurretInput;
 
     public float moveSpeed = 10;
     public float rotationSpeed = 10;
@@ -18,20 +17,30 @@ public class TankMovement : Movement
 
     public override void HullMove(float vertical)
     {
-        this.verticalInput = vertical;
-        transform.position = transform.position +transform.forward * vertical * moveSpeed * Time.deltaTime;
+        this.MovementInput.y = vertical;
     }
 
     public override void HullRotate(float horizontal)
     {
-        this.horizontalInput = horizontal;
-        transform.Rotate(Vector3.up * horizontal * rotationSpeed * Time.deltaTime);
+        this.MovementInput.x = horizontal;
     }
+
 
     public override void TurretRotate(float horizontal)
     {
-        this.turretInput = horizontal;
-        RotateTurret(horizontal);
+        this.TurretInput.x = horizontal;
+    }
+    public override void TurretPitch(float vertical)
+    {
+        this.TurretInput.y = vertical;
+    }
+
+    private void Update()
+    {
+        transform.position = transform.position + transform.forward * MovementInput.y * moveSpeed * Time.deltaTime;
+        transform.Rotate(Vector3.up * MovementInput.x * rotationSpeed * Time.deltaTime);
+        RotatePivot();
+        VerticalRotation();
     }
 
     private void LateUpdate()
@@ -39,9 +48,9 @@ public class TankMovement : Movement
         turret.rotation = Quaternion.RotateTowards(turret.rotation, pivot.rotation, turretRotationSpeed * Time.deltaTime);
     }
 
-    public void RotateTurret(float horizontalInput)
+    public void RotatePivot()
     {
-        pivot.transform.Rotate(Vector3.up * horizontalInput * cameraSpeed * Time.deltaTime);
+        pivot.transform.Rotate(Vector3.up * TurretInput.x * cameraSpeed * Time.deltaTime);
 
         //float angle = turret.transform.localEulerAngles.y;
         //if (angle > 180)
@@ -50,5 +59,29 @@ public class TankMovement : Movement
         //}
         //angle = Mathf.Clamp(angle, -turretRotationLimit, turretRotationLimit);
         //turret.transform.localEulerAngles = new Vector3(0, angle, 0);
+    }
+
+    private void VerticalRotation()
+    {
+
+        pivot.transform.rotation *= Quaternion.AngleAxis(TurretInput.y * cameraSpeed * Time.deltaTime, Vector3.right);
+
+        var angles = pivot.transform.localEulerAngles;
+        angles.z = 0;
+
+        var x = angles.x;
+
+        if (x > 180 && x < 340)
+        {
+            x = 340;
+        }
+        else if (x < 180 && x > 40)
+        {
+            x = 40;
+        }
+
+        angles.x = x;
+        pivot.transform.localEulerAngles = angles;
+
     }
 }
