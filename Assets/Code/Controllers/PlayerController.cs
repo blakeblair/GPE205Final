@@ -102,7 +102,25 @@ public class PlayerController : Controller
     {
         var pivot = TankMovement.pivot;
 
-        //pivot.transform.rotation *= Quaternion.AngleAxis(y * TankMovement.turretRotationSpeed, Vector3.up);
+        pivot.transform.rotation *= Quaternion.AngleAxis(y * TankMovement.cameraSpeed * Time.deltaTime, Vector3.right);
+
+        var angles = pivot.transform.localEulerAngles;
+        angles.z = 0;
+
+        var x = angles.x;
+
+        if(x > 180 && x < 340)
+        {
+            x = 340;
+        }
+        else if( x < 180 && x > 40)
+        {
+            x = 40;
+        }
+
+        angles.x = x;
+        pivot.transform.localEulerAngles = angles;
+
     }
 
     //public void UpdateCursorPosition(Vector3 position)
