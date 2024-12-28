@@ -12,9 +12,11 @@ public abstract class Pawn : MonoBehaviour
     public float hullMoveSpeed;
     public float hullRotateSpeed;
     public float attackRate;
-    public Transform cameraMount;
-    
-    
+
+    public Transform cameraLookAt;
+    public Transform cameraFollow;
+
+
     public abstract void Shoot();
     
     public abstract void HullMove(float verticalInput);

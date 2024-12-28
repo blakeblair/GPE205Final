@@ -13,17 +13,6 @@ public class Controller : MonoBehaviour
 
     public bool Dead;
 
-    public virtual void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    public virtual void Update()
-    {
-        
-    }
-
     public virtual void ProcessInputs()
     {
         

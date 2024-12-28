@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,34 +10,37 @@ public class AISenses : MonoBehaviour
     public TankPawn Pawn;
     public Transform destination;
     public Vector3 currentWaypoint;
-    public int currentWaypointIndex = 1;
+
+    public bool IsNavigatingToWaypoint => currentWaypointIndex > 0;
+
+    [SerializeField]
+    int currentWaypointIndex = -1;
     public bool traveling = false;
 
     [SerializeField]
     private Transform eye;
-    private Collider[] results;
+    private Collider[] SensedObjects;
     private NavMeshPath path;
     public float updateRate = 1f;
 
+    public List<TankPawn> SensedEnemies;
+
     private void Awake()
     {
+        currentWaypointIndex = -1;
+        SensedEnemies = new List<TankPawn>();
         Pawn = GetComponent<TankPawn>();
         path = new NavMeshPath();
-        results = new Collider[16];
+        SensedObjects = new Collider[16];
         lastWaypointTime = Time.time;
     }
 
     private void Update()
     {
-        UpdateVision();
+        if (Time.time - lastWaypointTime > updateRate)
+            UpdateVision();
 
-        if (target != null)
-        {
-            if(Time.time - lastWaypointTime > updateRate)
-                GotoWaypoint(target.transform.position);
-        }
-
-        DrawDebug();
+        //DrawDebug();
     }
 
     private void DrawDebug()
@@ -67,7 +71,7 @@ public class AISenses : MonoBehaviour
             currentWaypointIndex = 1;
         }
 
-        StartCoroutine(Travel(currentWaypoint));
+        StartCoroutine(Travel(currentWaypoint)); // Create the coroutine
         return true;
     }
 
@@ -76,9 +80,9 @@ public class AISenses : MonoBehaviour
     {
         var distance = Vector3.Distance(position, transform.position);
         bool reachedWaypoint = distance < stoppingDistance;
-        while (!reachedWaypoint)
+
+        while (!reachedWaypoint) //Update Loop with a condition
         {
-            DebugPlus.LogOnScreen("Distance: " + distance);
 
             traveling = true;
             NavigateTowardsWaypoint();
@@ -88,10 +92,10 @@ public class AISenses : MonoBehaviour
             reachedWaypoint = distance < stoppingDistance;
             if (reachedWaypoint)
             {
-                break;
+                break; //Stop the coroutine Immedieately
             }
 
-            yield return null;
+            yield return null; // Wait until the next frame
         }
 
         traveling = false;
@@ -105,7 +109,7 @@ public class AISenses : MonoBehaviour
 
         if (currentWaypointIndex < path.corners.Length)
         {
-            DebugPlus.LogOnScreen("Next is " + currentWaypointIndex).duration = 1.0f;
+            //DebugPlus.LogOnScreen("Next is " + currentWaypointIndex).duration = 1.0f;
             currentWaypoint = path.corners[currentWaypointIndex];
             StartCoroutine(Travel(currentWaypoint));
         }
@@ -121,7 +125,7 @@ public class AISenses : MonoBehaviour
         var cross = Vector3.Cross(direction.normalized, transform.forward);
         bool facing = Facing(currentWaypoint, 90);
 
-        DebugPlus.LogOnScreen("Cross: " + cross + "| Facing : " + facing);
+        //DebugPlus.LogOnScreen("Cross: " + cross + "| Facing : " + facing);
 
         if (cross.y < 0)
             Pawn.HullRotate(1f);
@@ -134,8 +138,8 @@ public class AISenses : MonoBehaviour
 
     private void UpdateVision()
     {
-        var sphereCast = Physics.OverlapSphereNonAlloc(transform.position, Skill.detectionRadius, results, Mask, QueryTriggerInteraction.Ignore);
-
+        var sphereCast = Physics.OverlapSphereNonAlloc(transform.position, Skill.detectionRadius, SensedObjects, Mask, QueryTriggerInteraction.Ignore);
+        SensedEnemies.Clear();
         if(sphereCast == 0)
         {
             return;
@@ -143,7 +147,7 @@ public class AISenses : MonoBehaviour
 
         for(int i = 0; i < sphereCast; i++)
         {
-            var col = results[i];
+            var col = SensedObjects[i];
             if (col.gameObject == gameObject) continue;
             var otherPawn = col.GetComponent<TankPawn>();
             if (otherPawn == null) continue;
@@ -151,18 +155,16 @@ public class AISenses : MonoBehaviour
 
             if (!Facing(col.transform.position, Skill.detectionFov)) continue;
 
-            DebugPlus.LogOnScreen("I am in range of " + col.name);
+            //DebugPlus.LogOnScreen("I am in range of " + col.name);
 
             var los = HasLos(col);
 
             if (!los) continue;
 
-            if (target == null)
-                target = otherPawn;
+            SensedEnemies.Add(otherPawn);
         }
     }
 
-    TankPawn target;
 
     private bool HasLos(Collider col)
     {

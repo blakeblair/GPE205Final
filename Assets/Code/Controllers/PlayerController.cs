@@ -23,9 +23,8 @@ public class PlayerController : Controller
         //Camera = playerNum == 0 ? GameManager.Instance.P1Camera.transform : GameManager.Instance.p2Camera.transform;
 
         pawn = controlledPawn;
-        Cam.SetParent(pawn.cameraMount);
-        Cam.localPosition = Vector3.zero;
-        Cam.localRotation = Quaternion.identity;
+
+        CameraManager.Instance.Attach(GetComponent<TankPawn>());
     }
 
     public void AddScore(int amount)
@@ -48,11 +47,6 @@ public class PlayerController : Controller
         pawn.Health.Heal(100);
     }
 
-    public override void Start()
-    {
-        base.Start();
-    }
-
     private void OnDestroy()
     {
         if (Cam != null)
@@ -64,12 +58,11 @@ public class PlayerController : Controller
         Respawn();
     }
 
-    public override void Update()
+    public void Update()
     {
         if (pawn == null) return;
         ProcessInputs();
         
-        base.Update();
     }
 
     public override void ProcessInputs()
