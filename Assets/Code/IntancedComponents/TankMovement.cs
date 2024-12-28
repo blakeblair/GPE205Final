@@ -34,18 +34,22 @@ public class TankMovement : Movement
     {
         this.TurretInput.y = vertical;
     }
-
-    private void Update()
+    private void LateUpdate()
     {
         transform.position = transform.position + transform.forward * MovementInput.y * moveSpeed * Time.deltaTime;
         transform.Rotate(Vector3.up * MovementInput.x * rotationSpeed * Time.deltaTime);
+
         RotatePivot();
         VerticalRotation();
+        turret.rotation = Quaternion.RotateTowards(turret.rotation, pivot.rotation, turretRotationSpeed * Time.deltaTime);
+
+        ClearInput();
     }
 
-    private void LateUpdate()
+    private void ClearInput()
     {
-        turret.rotation = Quaternion.RotateTowards(turret.rotation, pivot.rotation, turretRotationSpeed * Time.deltaTime);
+        TurretInput = new Vector2();
+        MovementInput = new Vector2();
     }
 
     public void RotatePivot()

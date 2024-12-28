@@ -5,7 +5,14 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     public Pawn pawn;
-    // Start is called before the first frame update
+
+    [field: SerializeField]
+    public int Score { get; protected set; }
+
+    public int PlayerNumber;
+
+    public bool Dead;
+
     public virtual void Start()
     {
         
