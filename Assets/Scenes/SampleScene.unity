@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &240059962 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4274064341500348880, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+  m_PrefabInstance: {fileID: 1164211391}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &476401338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -180,6 +185,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f79376b42c467346a615e4a5be28eeb, type: 3}
+--- !u!1 &507427678 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7697990327873758600, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+  m_PrefabInstance: {fileID: 1446418407347811607}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &507427687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507427678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56218222cf54de42991040471f71c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawn: {fileID: 0}
+  currentAimPoint: {x: 0, y: 0, z: 0}
+  <Lives>k__BackingField: 3
+  PlayerNumber: 0
+  Dead: 0
 --- !u!1 &574808453
 GameObject:
   m_ObjectHideFlags: 3
@@ -553,6 +580,125 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1164211391
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5387003470925230069, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: pawn
+      value: 
+      objectReference: {fileID: 1164211392}
+    - target: {fileID: 4274064341500348880, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274064341500348880, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.00000022351739
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -360
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7697990327873758600, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_Name
+      value: AI Tank
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5892124284550107511, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7697990327873758600, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1164211394}
+    - targetCorrespondingSourceObject: {fileID: 7697990327873758600, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1164211402}
+  m_SourcePrefab: {fileID: 100100000, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+--- !u!114 &1164211392 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5105972648843550838, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+  m_PrefabInstance: {fileID: 1164211391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164211393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bc07866d1c5ded45be07e929104e3e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1164211393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7697990327873758600, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+  m_PrefabInstance: {fileID: 1164211391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1164211394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164211393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b562f01121fd047837715a22f9ceae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Skill: {fileID: 11400000, guid: 592883252a67dbd45ae98f11811493cf, type: 2}
+  eye: {fileID: 240059962}
+--- !u!114 &1164211402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164211393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d605e75c62a8c59459dcda95f5d10f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawn: {fileID: 0}
 --- !u!1 &1393716262
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +865,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4274064341500348880, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274064341500348880, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.05
+      objectReference: {fileID: 0}
     - target: {fileID: 7034360687157493554, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.643937e-13
@@ -761,12 +915,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7697990327873758600, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
       propertyPath: m_Name
-      value: quick tank
+      value: Player Tank
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -5387003470925230069, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7697990327873758600, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 507427687}
   m_SourcePrefab: {fileID: 100100000, guid: d4459b1fc74121f478f8dd4bf52e9ae5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -776,6 +934,7 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 697749592}
   - {fileID: 1446418407347811607}
+  - {fileID: 1164211391}
   - {fileID: 476401338}
   - {fileID: 1601947543}
   - {fileID: 1393716264}

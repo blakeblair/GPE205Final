@@ -12,13 +12,6 @@ using UnityEngine;
 public class TankPawn : Pawn
 {
 
-    public GameObject turret;
-    public GameObject bulletPrefab;
-    public Transform bulletSpawnPoint;
-    public float bulletSpeed = 10;
-    public float fireRate = 1;
-    private float nextFireTime = 0;
-
     private void Awake()
     {
         Health = GetComponent<Health>();
@@ -32,6 +25,7 @@ public class TankPawn : Pawn
     
     public override void Shoot()
     {
+        Shooter.Shoot();
     }
 
     public override void HullMove(float verticalInput)
@@ -65,14 +59,4 @@ public class TankPawn : Pawn
         
     //}
 
-
-    public void Fire()
-    {
-        if (Time.time > nextFireTime)
-        {
-            nextFireTime = Time.time + fireRate;
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
-        }
-    }
 }

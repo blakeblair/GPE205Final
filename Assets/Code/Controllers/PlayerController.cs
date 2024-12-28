@@ -22,6 +22,7 @@ public class PlayerController : Controller
 
     private void Awake()
     {
+        pawn = GetComponent<Pawn>();
         TankMovement = GetComponent<TankMovement>();
     }
 
@@ -93,8 +94,21 @@ public class PlayerController : Controller
 
         pawn.HullRotate(move.x);
         pawn.HullMove(move.y);
+
         pawn.TurretRotate(look.x);
         pawn.TurretPitch(look.y);
+
+        ShootInput();
+    }
+
+    private void ShootInput()
+    {
+        var shoot = GameManager.Controls.FindAction("Shoot").WasPressedThisFrame();
+
+        if(shoot)
+        {
+            pawn.Shoot();
+        }
     }
 
 
@@ -110,12 +124,12 @@ public class PlayerController : Controller
     //        currentAimPoint = hit.point;
     //    }
     //}
-    
+
     //private void ApplyTurretRotation()
     //{
     //    //rotate the tankTurret block around the Y axis to face the cursor with a speed delay
     //    //rotate the guntube at a pivot point around the local X  axis to face the cursor with a speed delay
-        
+
     //    //if the angle between the turret and the cursor is less than 0.1f return
     //    Vector3 aimDirection = aimCursor.transform.position - tankturret.position;
     //    float angle = Vector3.Angle(tankturret.forward, aimDirection);
@@ -133,7 +147,7 @@ public class PlayerController : Controller
     //    float yRotation = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;
     //    Quaternion destination = Quaternion.Euler(0, yRotation + 180, 0);
     //    tankturret.rotation = Quaternion.RotateTowards(tankturret.rotation, destination, turretRotationSpeed * Time.deltaTime);
-        
+
     //    /* //rotate the turret on the Y axis to face the aimCursor
     //     Quaternion turretRotation = Quaternion.LookRotation(aimDirection, Vector3.up);
     //     tankturret.rotation = Quaternion.RotateTowards(tankturret.rotation, turretRotation, turretRotationSpeed * Time.deltaTime);

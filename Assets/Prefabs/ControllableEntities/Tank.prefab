@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6680771980531036270}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5893173278689367419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4274064341500348880}
+  m_Layer: 3
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4274064341500348880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893173278689367419}
+  serializedVersion: 2
+  m_LocalRotation: {x: 1.4210855e-13, y: -1, z: -0, w: -0.00000046626292}
+  m_LocalPosition: {x: -1.1368684e-13, y: -0, z: -0.841}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6443634528630385361}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &7909770936515032850
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
       propertyPath: m_Name
-      value: quick tank
+      value: Tank
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
       propertyPath: m_Layer
@@ -173,6 +204,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5746564759562468899, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6680771980531036270}
+    - targetCorrespondingSourceObject: {fileID: 4573910981125042696, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4274064341500348880}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
       insertIndex: -1
@@ -194,16 +228,16 @@ PrefabInstance:
       addedObject: {fileID: 5105972648843550838}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5892124284550107511}
+      addedObject: {fileID: 2674148309981655580}
   m_SourcePrefab: {fileID: 100100000, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
 --- !u!4 &3002298450860336890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5746564759562468899, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
   m_PrefabInstance: {fileID: 7355971087580256473}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4691735874497447161 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -6410367948365276128, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
+--- !u!4 &6443634528630385361 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4573910981125042696, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}
   m_PrefabInstance: {fileID: 7355971087580256473}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7697990327873758600 stripped
@@ -252,9 +286,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pivot: {fileID: 6680771980531036270}
   turret: {fileID: 8433864929308899551}
-  verticalInput: 0
-  horizontalInput: 0
-  turretInput: 0
+  MovementInput: {x: 0, y: 0}
+  TurretInput: {x: 0, y: 0}
   moveSpeed: 5
   rotationSpeed: 25
   cameraSpeed: 5
@@ -272,8 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252746368c07f2147bd1945690ef90f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunTube: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 2635473746803412873, guid: 89b6850adee98a84da6b3e7128ef08fc, type: 3}
+  firePoint: {fileID: 4274064341500348880}
 --- !u!65 &4777387195928986723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -307,6 +340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542f5c114a80fbd42832612aff12edf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pawn: {fileID: 0}
+  lastDamager: {fileID: 0}
 --- !u!114 &5105972648843550838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,12 +361,7 @@ MonoBehaviour:
   hullRotateSpeed: 5
   attackRate: 5
   cameraMount: {fileID: 0}
-  turret: {fileID: 4691735874497447161}
-  bulletPrefab: {fileID: 0}
-  bulletSpawnPoint: {fileID: 0}
-  bulletSpeed: 10
-  fireRate: 1
---- !u!114 &5892124284550107511
+--- !u!114 &2674148309981655580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -340,14 +370,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7697990327873758600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a56218222cf54de42991040471f71c46, type: 3}
+  m_Script: {fileID: 11500000, guid: b97cdf6f49677b54abaf7767126f1164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 5105972648843550838}
-  currentAimPoint: {x: 0, y: 0, z: 0}
-  <Lives>k__BackingField: 3
-  PlayerNumber: 0
-  Dead: 0
+  volumeDistance: 0
+  moveNoiseMultiplier: 5
+  rotateNoiseMultiplier: 5
+  shootingNoiseMultiplier: 10
+  tankMovement: {fileID: 0}
 --- !u!4 &8433864929308899551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1377736229043773446, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}

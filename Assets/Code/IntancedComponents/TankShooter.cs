@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class TankShooter : Shooter
 {
-    public Transform gunTube;
-    public GameObject bulletPrefab;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private TankPawn tankPawn;
+    private NoiseMaker noiseMaker;
+
+    private void Awake()
+    { 
+        noiseMaker = GetComponent<NoiseMaker>();
+        tankPawn = GetComponent<TankPawn>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Shoot()
     {
-        
+        Bullet newBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        newBullet.InitBullet(tankPawn, firePoint.forward);
+        noiseMaker.shootingVolume = noiseMaker.shootingNoiseMultiplier;
     }
 }

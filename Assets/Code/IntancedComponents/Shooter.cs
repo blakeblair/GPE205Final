@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter : MonoBehaviour
+public abstract class Shooter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected Bullet bulletPrefab;
+    [SerializeField] protected Transform firePoint;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void Shoot();
+
 }
