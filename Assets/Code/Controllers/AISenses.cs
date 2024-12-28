@@ -16,21 +16,24 @@ public class AISenses : MonoBehaviour
     private Transform eye;
     private Collider[] results;
     private NavMeshPath path;
+    public float updateRate = 1f;
 
     private void Awake()
     {
         Pawn = GetComponent<TankPawn>();
         path = new NavMeshPath();
         results = new Collider[16];
+        lastWaypointTime = Time.time;
     }
 
     private void Update()
     {
         UpdateVision();
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (target != null)
         {
-            GotoWaypoint(destination.position);
+            if(Time.time - lastWaypointTime > updateRate)
+                GotoWaypoint(target.transform.position);
         }
 
         DrawDebug();
@@ -48,8 +51,11 @@ public class AISenses : MonoBehaviour
         DebugPlus.DrawSphere(currentWaypoint, 1f).color = Color.blue;
     }
 
+    public float lastWaypointTime;
+
     public bool GotoWaypoint(Vector3 position)
     {
+        lastWaypointTime = Time.time;
         StopAllCoroutines();
         var result = NavMesh.CalculatePath(transform.position, position, NavMesh.AllAreas, path);
 
@@ -139,7 +145,8 @@ public class AISenses : MonoBehaviour
         {
             var col = results[i];
             if (col.gameObject == gameObject) continue;
-            if (col.GetComponent<TankPawn>() == null) continue;
+            var otherPawn = col.GetComponent<TankPawn>();
+            if (otherPawn == null) continue;
 
 
             if (!Facing(col.transform.position, Skill.detectionFov)) continue;
@@ -150,10 +157,12 @@ public class AISenses : MonoBehaviour
 
             if (!los) continue;
 
-            DebugPlus.LogOnScreen("I see " + col.name);
-
+            if (target == null)
+                target = otherPawn;
         }
     }
+
+    TankPawn target;
 
     private bool HasLos(Collider col)
     {
