@@ -1,4 +1,4 @@
-using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -22,6 +22,14 @@ public class GameManager : MonoBehaviour
 
     public AISkill[] Skills;
 
+    public Transform RandomWaypoint
+    {
+        get
+        {
+            return GameManager.Instance.Waypoints[UnityEngine.Random.Range(0, Instance.Waypoints.Length)];
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -29,6 +37,26 @@ public class GameManager : MonoBehaviour
         Waypoints = WaypointsRoot.GetComponentsInChildren<Transform>();
     }
 
+    private void Start()
+    {
+        StartGame();
+    }
+
+    private void StartGame()
+    {
+        var player = CreatePlayerPawn();
+
+        player.transform.GetComponent<Rigidbody>().MovePosition(RandomWaypoint.position);
+        player.transform.rotation = RandomWaypoint.rotation;
+
+        CameraManager.Instance.Attach(player);
+
+        var enemy = CreateEnemyPawn();
+
+        enemy.transform.GetComponent<Rigidbody>().MovePosition(RandomWaypoint.position);
+        enemy.transform.rotation = RandomWaypoint.rotation;
+
+    }
 
     public TankPawn CreatePlayerPawn()
     {
@@ -36,14 +64,15 @@ public class GameManager : MonoBehaviour
 
         tank.AddComponent<PlayerController>();
     
-        return tank;
+        return tank;    
     }
 
     public TankPawn CreateEnemyPawn()
     {
         var tank = Instantiate(tankPrefab);
-        tank.AddComponent<AIController>();
+        tank.AddComponent<AIWaypointing>();
         var senses = tank.AddComponent<AISenses>();
+        tank.AddComponent<AIController>();
 
         senses.Skill = Skills[UnityEngine.Random.Range(0, Skills.Length)];
         tank.name = senses.Skill.name;
@@ -59,20 +88,6 @@ public class GameManager : MonoBehaviour
     public void Respawn(Pawn pawn)
     {
         
-    }
-
-}
-
-public class CameraManager : MonoBehaviour
-{
-    public static CameraManager Instance;
-
-    public CinemachineVirtualCamera VirtualCamera;
-
-    public void Attach(TankPawn tankPawn)
-    {
-        VirtualCamera.Follow = tankPawn.cameraFollow;
-        VirtualCamera.LookAt = tankPawn.cameraLookAt;
     }
 
 }

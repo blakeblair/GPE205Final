@@ -360,7 +360,8 @@ MonoBehaviour:
   hullMoveSpeed: 4.93
   hullRotateSpeed: 5
   attackRate: 5
-  cameraMount: {fileID: 0}
+  cameraLookAt: {fileID: 6407212146349378435}
+  cameraFollow: {fileID: 6680771980531036270}
 --- !u!114 &2674148309981655580
 MonoBehaviour:
   m_ObjectHideFlags: 0

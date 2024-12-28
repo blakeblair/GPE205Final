@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 
 public class AIController : Controller
@@ -7,6 +6,7 @@ public class AIController : Controller
 
     public AISenses Senses;
     public TankPawn target;
+    public AIWaypointing Waypointing;
 
     private void Awake()
     {
@@ -15,6 +15,7 @@ public class AIController : Controller
 
     private void Start()
     {
+        Waypointing = GetComponent<AIWaypointing>();
         Senses = GetComponent<AISenses>();
     }
 
@@ -24,14 +25,18 @@ public class AIController : Controller
 
         State PatrolState = new PatrolState();
         Transition hasTarget = new HasTargetEnoughHealth();
+        hasTarget.NextState = new ChaseState();
+
         stateMachine.CurrentState = PatrolState;
+        PatrolState.transitions.Add(hasTarget);
 
         //State ChaseState = new ChaseState();
         //hasTarget.NextState = ChaseState
+    }
 
-
-        PatrolState.transitions.Add(hasTarget);
-
+    public override void ProcessInputs()
+    {
+        base.ProcessInputs();
     }
 
     public void Transition(State state)
@@ -42,11 +47,7 @@ public class AIController : Controller
 
     private void Update()
     {
-        if(stateMachine.CurrentState.EvaluateTransitions(this))
-        {
-
-        }
-        
+        stateMachine.CurrentState.EvaluateTransitions(this);
 
         stateMachine.Update(this);
     }
@@ -61,14 +62,25 @@ public class PatrolState : State
     {
         base.OnStateUpdate(controller);
 
-        if(!controller.Senses.IsNavigatingToWaypoint)
+        if(!controller.Waypointing.IsNavigatingToWaypoint)
         {
-            var randomWaypoint = GameManager.Instance.Waypoints[UnityEngine.Random.Range(0, GameManager.Instance.Waypoints.Length)].position;
-            controller.Senses.GotoWaypoint(randomWaypoint);
+            var randomWaypoint = GameManager.Instance.RandomWaypoint.position;
+            controller.Waypointing.SetDestination(randomWaypoint);
         }
 
     }
 }
+public class ChaseState : State
+{
+    public override void OnStateUpdate(AIController controller)
+    {
+        base.OnStateUpdate(controller);
+
+        controller.Waypointing.SetDestination(controller.target.transform.position);
+    }
+}
+
+
 
 public class StateMachine
 {
