@@ -6,6 +6,7 @@ public class TankParameters : ScriptableObject
     public int MaxHealth = 100;
     public int ShotDamage = 25;
     public float ShootFrequency = 0.75f;
+    public float ShotForce = 10f;
 
     public float hullMoveSpeed = 5;
     public float hullRotationSpeed = 25;

@@ -5,21 +5,14 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private int currentHealth = 100;
-    public int MaxHealth
-    {
-        get
-        {
-            return pawn.Parameters.MaxHealth;
-        }
-    }
+    public int MaxHealth = 100;
 
-    public delegate void OnHealthChanged(int health);
+    public delegate void OnHealthChanged(int health, TankPawn damager);
     public event OnHealthChanged HealthChanged;
 
-    public delegate void OnDeath();
+    public delegate void OnDeath(TankPawn killer);
     public event OnDeath DeathEvent;
 
-    public TankPawn pawn;
     public TankPawn lastDamager;
     public int CurrentHealth
     {
@@ -36,37 +29,19 @@ public class Health : MonoBehaviour
 
             if (currentHealth != oldHealth)
             {
-                HealthChanged?.Invoke(currentHealth);
+                HealthChanged?.Invoke(currentHealth, lastDamager);
                 Debug.Log(value + "damage taken! " + "Health: " + CurrentHealth);
             }
 
             if (oldHealth > 0 && CurrentHealth <= 0)
             {
-                DeathEvent?.Invoke();
+                DeathEvent?.Invoke(lastDamager);
 
-                GiveKillerScore();
                 lastDamager = null;
 
                 Debug.Log("Dead!");
             }
         }
-    }
-
-    private void GiveKillerScore()
-    {
-        if (lastDamager != null)
-        {
-            var controller = lastDamager.GetComponent<PlayerController>();
-            if (controller)
-            {
-                controller.AddScore(10);
-            }
-        }
-    }
-
-    private void Awake()
-    {
-        pawn = GetComponent<TankPawn>();
     }
 
     private void Start()

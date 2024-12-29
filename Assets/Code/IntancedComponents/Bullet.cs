@@ -10,16 +10,20 @@ public class Bullet : MonoBehaviour
     private TankPawn _owner;
 
     public float lifeTime = 5f;
+    float shotForce = 1f;
+    Vector3 shotOrigin;
 
     public void InitBullet(TankPawn firingowner, Vector3 direction)
     {
+        shotOrigin = transform.position;
         _owner = firingowner;
         bulletrb.velocity = direction * velocity;
+        shotForce = firingowner.Parameters.ShotForce;
         damage = firingowner.Parameters.ShotDamage;
         Destroy(gameObject, lifeTime);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Health health))
         {
@@ -29,6 +33,11 @@ public class Bullet : MonoBehaviour
 
         if(bulletVFX)
             Instantiate(bulletVFX, transform.position, Quaternion.identity);
+
+        var rb = other.GetComponent<Rigidbody>();
+
+        var dir = (other.transform.position - shotOrigin).normalized;
+        rb.AddForce(dir * shotForce);
 
         Destroy(gameObject);
     }
