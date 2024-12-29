@@ -56,7 +56,7 @@ public class AIWaypointing : MonoBehaviour
 
         if (!result) return false;
 
-        if (path.corners.Length > 0)
+        if (path.corners.Length > 1)
         {
             currentWaypoint = path.corners[1];
             currentWaypointIndex = 1;
@@ -66,6 +66,12 @@ public class AIWaypointing : MonoBehaviour
         return true;
     }
 
+    public void Stop()
+    {
+        StopAllCoroutines();
+        currentWaypointIndex = -1;
+    }
+
     IEnumerator Travel(Vector3 position)
     {
         var distance = Vector3.Distance(position, transform.position);
@@ -73,9 +79,8 @@ public class AIWaypointing : MonoBehaviour
 
         while (!reachedWaypoint) //Update Loop with a condition
         {
-
-            NavigateTowardsWaypoint();
-
+            MoveTowardsPositionIfFacing(currentWaypoint);
+            FaceTowardsPosition(currentWaypoint);
 
             distance = Vector3.Distance(position, transform.position);
             reachedWaypoint = distance < stoppingDistance;
@@ -103,25 +108,30 @@ public class AIWaypointing : MonoBehaviour
         }
         else
         {
-            currentWaypointIndex = -1;
+            Stop();
         }
     }
 
-    private void NavigateTowardsWaypoint()
+    public void MoveTowardsPositionIfFacing(Vector3 position)
     {
-        var direction = currentWaypoint - transform.position;
+        var direction = position - transform.position;
         var cross = Vector3.Cross(direction.normalized, transform.forward);
-        bool facing = Senses.Facing(currentWaypoint, 90);
+        bool facing = Senses.Facing(position, 90);
 
-        //DebugPlus.LogOnScreen("Cross: " + cross + "| Facing : " + facing);
+        if (facing && Mathf.Abs(cross.y) < 0.25f)
+            Pawn.HullMove(1f);
+    }
+
+    public void FaceTowardsPosition(Vector3 position)
+    {
+        var direction = position - transform.position;
+        var cross = Vector3.Cross(direction.normalized, transform.forward);
 
         if (cross.y < 0)
             Pawn.HullRotate(1f);
         else if (cross.y > 0)
             Pawn.HullRotate(-1f);
-
-        if (facing && Mathf.Abs(cross.y) < 0.25f)
-            Pawn.HullMove(1f);
     }
+
 
 }

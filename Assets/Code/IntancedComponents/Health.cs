@@ -5,7 +5,13 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private int currentHealth = 100;
-    public int MaxHealth { get; private set; } = 100;
+    public int MaxHealth
+    {
+        get
+        {
+            return pawn.Parameters.MaxHealth;
+        }
+    }
 
     public delegate void OnHealthChanged(int health);
     public event OnHealthChanged HealthChanged;
@@ -61,7 +67,11 @@ public class Health : MonoBehaviour
     private void Awake()
     {
         pawn = GetComponent<TankPawn>();
-        CurrentHealth = MaxHealth;
+    }
+
+    private void Start()
+    {
+        currentHealth = MaxHealth;
     }
 
     public void OnDamageTaken(int damage)

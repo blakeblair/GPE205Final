@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "AISKill", menuName = "AI/Skill")]
+[CreateAssetMenu(fileName = "AISKill", menuName = "Tank/AI/Skill")]
 public class AISkill : ScriptableObject
 {
-    public float detectionRadius = 5;
-    public float detectionTime = 1;
-    public float detectionFov = 90;
+    public TankParameters CustomParameters;
 
-    public float health = 100;
-    public float FleeThreshold = 100;
+    public float detectionRadius = 5f;
+    public float lostSightTime = 1f;
+    public float detectionFov = 90f;
+
+    public float FleeThreshold = 50f;
 }

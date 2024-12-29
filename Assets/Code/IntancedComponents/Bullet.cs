@@ -4,17 +4,18 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody bulletrb;
 
-    public int damage = 10;
+    int damage;
     [SerializeField] private float velocity = 20;
     [SerializeField] private GameObject bulletVFX;
-    private Pawn _owner;
+    private TankPawn _owner;
 
     public float lifeTime = 5f;
 
-    public void InitBullet(Pawn firingowner, Vector3 direction)
+    public void InitBullet(TankPawn firingowner, Vector3 direction)
     {
         _owner = firingowner;
         bulletrb.velocity = direction * velocity;
+        damage = firingowner.Parameters.ShotDamage;
         Destroy(gameObject, lifeTime);
     }
 

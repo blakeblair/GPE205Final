@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,18 +12,22 @@ using UnityEngine;
 
 public class TankPawn : Pawn
 {
+    public TankParameters Parameters = null;
 
     private void Awake()
     {
         Health = GetComponent<Health>();
         Shooter = GetComponent<TankShooter>();
         Movement = GetComponent<TankMovement>();
-
-        //TankAudio = GetComponent<TankAudio>();
-        //NoiseMaker = GetComponent<NoiseMaker>();
-        //PowerupManager = GetComponent<PowerupManager>();
     }
-    
+
+    private void OnDestroy()
+    {
+        if (Parameters)
+            Destroy(Parameters);
+        Parameters = null;
+    }
+
     public override void Shoot()
     {
         Shooter.Shoot();
@@ -54,9 +59,14 @@ public class TankPawn : Pawn
         
     }
 
+    public void SetParameters(TankParameters baseTankParameters)
+    {
+        Parameters = Instantiate(baseTankParameters);
+    }
+
     //public override void ActivatePowerup(PowerupType powerup)
     //{
-        
+
     //}
 
 }

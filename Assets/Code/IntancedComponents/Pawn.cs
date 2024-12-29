@@ -9,10 +9,6 @@ public abstract class Pawn : MonoBehaviour
     public Shooter Shooter;
     public Health Health;
 
-    public float hullMoveSpeed;
-    public float hullRotateSpeed;
-    public float attackRate;
-
     public Transform cameraLookAt;
     public Transform cameraFollow;
 

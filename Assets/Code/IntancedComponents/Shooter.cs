@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Shooter : MonoBehaviour
 {
-    [SerializeField] protected Bullet bulletPrefab;
-    [SerializeField] protected Transform firePoint;
+    [SerializeField] public Bullet bulletPrefab;
+    [SerializeField] public Transform firePoint;
 
     public abstract void Shoot();
 

@@ -8,8 +8,8 @@ public class AISenses : MonoBehaviour
     public LayerMask Mask => LayerMask.GetMask("Default", "Tank");
     public AISkill Skill;
     public TankPawn Pawn;
+    public Shooter Shooter;
 
-    [SerializeField]
     private Transform eye;
     private Collider[] sensedObjects;
     public float updateRate = 1f;
@@ -19,20 +19,28 @@ public class AISenses : MonoBehaviour
 
     private void Awake()
     {
+        Shooter = GetComponent<Shooter>();
         SensedEnemies = new List<TankPawn>();
         Pawn = GetComponent<TankPawn>();
         sensedObjects = new Collider[16];
+
+        eye = Shooter.firePoint;
+
+
     }
 
     private void Update()
     {
-        if (Time.time - lastUpdateTime > updateRate)
+        //if (Time.time - lastUpdateTime > updateRate)
             UpdateVision();
+
+        DebugPlus.LogOnScreen(SensedEnemies.Count);
 
     }
 
     private void UpdateVision()
     {
+        lastUpdateTime = Time.time;
         var sphereCast = Physics.OverlapSphereNonAlloc(transform.position, Skill.detectionRadius, sensedObjects, Mask, QueryTriggerInteraction.Ignore);
         SensedEnemies.Clear();
         if(sphereCast == 0)
@@ -50,7 +58,7 @@ public class AISenses : MonoBehaviour
 
             if (!Facing(col.transform.position, Skill.detectionFov)) continue;
 
-            //DebugPlus.LogOnScreen("I am in range of " + col.name);
+            DebugPlus.LogOnScreen("I am in range of " + col.name);
 
             var los = HasLos(col);
 
@@ -63,18 +71,34 @@ public class AISenses : MonoBehaviour
 
     public bool HasLos(Collider col)
     {
-        var dir = (col.transform.position - eye.transform.position).normalized;
-        var ray = Physics.Raycast(eye.transform.position, dir, out var hit, Skill.detectionRadius, Mask, QueryTriggerInteraction.Ignore);
+        var start = new Vector3(transform.position.x, eye.position.y, transform.position.z);
+        var dir = (col.transform.position - start).normalized;
+        var ray = Physics.Raycast(start, dir, out var hit, Skill.detectionRadius, Mask, QueryTriggerInteraction.Ignore);
         
         if(ray)
         {
-            DebugPlus.DrawLine(eye.transform.position, hit.point);
+            DebugPlus.DrawLine(start, hit.point);
         }
 
 
         return ray && hit.collider == col;
     }
 
+    public bool HasClearShot(Collider col)
+    {
+        var dir = eye.transform.forward;//(col.transform.position - eye.transform.position).normalized;
+        var ray = Physics.Raycast(eye.transform.position, dir, out var hit, Skill.detectionRadius, Mask, QueryTriggerInteraction.Ignore);
+
+        if (ray)
+        {
+            DebugPlus.DrawLine(eye.transform.position, hit.point).color = Color.magenta;
+        }
+
+
+        return ray && hit.collider == col;
+    }
+
+    //If transform.forward is facing fov degress of position
     public bool Facing(Vector3 position, float fov)
     {
         var dir = (position - transform.transform.position).normalized;

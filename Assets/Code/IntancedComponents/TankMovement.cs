@@ -9,11 +9,13 @@ public class TankMovement : Movement
     public Vector2 MovementInput;
     public Vector2 TurretInput;
 
-    public float moveSpeed = 10;
-    public float rotationSpeed = 10;
-    public float cameraSpeed = 10;
-    public float turretRotationSpeed = 10;
-    public float turretRotationLimit = 45;
+    public TankPawn pawn;
+
+
+    private void Awake()
+    {
+        pawn = GetComponent<TankPawn>();
+    }
 
     public override void HullMove(float vertical)
     {
@@ -36,12 +38,12 @@ public class TankMovement : Movement
     }
     private void LateUpdate()
     {
-        transform.position = transform.position + transform.forward * MovementInput.y * moveSpeed * Time.deltaTime;
-        transform.Rotate(Vector3.up * MovementInput.x * rotationSpeed * Time.deltaTime);
+        transform.position = transform.position + transform.forward * MovementInput.y * pawn.Parameters.hullMoveSpeed * Time.deltaTime;
+        transform.Rotate(Vector3.up * MovementInput.x * pawn.Parameters.hullRotationSpeed * Time.deltaTime);
 
         RotatePivot();
         VerticalRotation();
-        turret.rotation = Quaternion.RotateTowards(turret.rotation, pivot.rotation, turretRotationSpeed * Time.deltaTime);
+        turret.rotation = Quaternion.RotateTowards(turret.rotation, pivot.rotation, pawn.Parameters.turretRotationSpeed * Time.deltaTime);
 
         ClearInput();
     }
@@ -54,7 +56,7 @@ public class TankMovement : Movement
 
     public void RotatePivot()
     {
-        pivot.transform.Rotate(Vector3.up * TurretInput.x * cameraSpeed * Time.deltaTime);
+        pivot.transform.Rotate(Vector3.up * TurretInput.x * pawn.Parameters.cameraSpeed * Time.deltaTime);
 
         //float angle = turret.transform.localEulerAngles.y;
         //if (angle > 180)
@@ -68,7 +70,7 @@ public class TankMovement : Movement
     private void VerticalRotation()
     {
 
-        pivot.transform.rotation *= Quaternion.AngleAxis(TurretInput.y * cameraSpeed * Time.deltaTime, Vector3.right);
+        pivot.transform.rotation *= Quaternion.AngleAxis(TurretInput.y * pawn.Parameters.cameraSpeed * Time.deltaTime, Vector3.right);
 
         var angles = pivot.transform.localEulerAngles;
         angles.z = 0;

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8cf4db3b7db3249ac66c757dd7a6d1, type: 3}
   m_Name: Generic Enemy
   m_EditorClassIdentifier: 
-  detectionRadius: 5
-  detectionTime: 1
+  CustomParameters: {fileID: 0}
+  detectionRadius: 15
+  lostSightTime: 5
   detectionFov: 90
+  FleeThreshold: 50

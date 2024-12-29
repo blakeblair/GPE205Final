@@ -13,6 +13,11 @@ public class Controller : MonoBehaviour
 
     public bool Dead;
 
+    protected virtual void Awake()
+    {
+        pawn = GetComponent<Pawn>();
+    }
+
     public virtual void ProcessInputs()
     {
         

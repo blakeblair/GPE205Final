@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public AISkill[] Skills;
 
+    public TankParameters BaseTankParameters;
+
     public Transform RandomWaypoint
     {
         get
@@ -34,7 +37,14 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         _controls.Enable();
-        Waypoints = WaypointsRoot.GetComponentsInChildren<Transform>();
+        Waypoints = new Transform[WaypointsRoot.childCount];
+        int index = 0;
+        foreach(Transform t in WaypointsRoot)
+        {
+            Waypoints[index] = t;
+            index++;
+        }
+        
     }
 
     private void Start()
@@ -49,12 +59,19 @@ public class GameManager : MonoBehaviour
         player.transform.GetComponent<Rigidbody>().MovePosition(RandomWaypoint.position);
         player.transform.rotation = RandomWaypoint.rotation;
 
+        player.SetParameters(BaseTankParameters);
+        
         CameraManager.Instance.Attach(player);
 
-        var enemy = CreateEnemyPawn();
+        var skill = Skills[UnityEngine.Random.Range(0, Skills.Length)];
+        var enemy = CreateEnemyPawn(skill);
 
         enemy.transform.GetComponent<Rigidbody>().MovePosition(RandomWaypoint.position);
         enemy.transform.rotation = RandomWaypoint.rotation;
+        if (skill.CustomParameters)
+            enemy.SetParameters(skill.CustomParameters);
+        else
+            enemy.SetParameters(BaseTankParameters);
 
     }
 
@@ -67,14 +84,14 @@ public class GameManager : MonoBehaviour
         return tank;    
     }
 
-    public TankPawn CreateEnemyPawn()
+    public TankPawn CreateEnemyPawn(AISkill skill)
     {
         var tank = Instantiate(tankPrefab);
         tank.AddComponent<AIWaypointing>();
         var senses = tank.AddComponent<AISenses>();
         tank.AddComponent<AIController>();
 
-        senses.Skill = Skills[UnityEngine.Random.Range(0, Skills.Length)];
+        senses.Skill = skill;
         tank.name = senses.Skill.name;
 
         return tank;

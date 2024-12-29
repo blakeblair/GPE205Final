@@ -12,9 +12,9 @@ public class PlayerController : Controller
 
     private TankMovement TankMovement;
 
-    private void Awake()
+    protected override void Awake()
     {
-        pawn = GetComponent<Pawn>();
+        base.Awake();
         TankMovement = GetComponent<TankMovement>();
     }
 
