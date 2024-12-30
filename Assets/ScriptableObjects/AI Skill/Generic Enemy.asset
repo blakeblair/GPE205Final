@@ -19,3 +19,4 @@ MonoBehaviour:
   lostSightTime: 5
   detectionFov: 90
   FleeThreshold: 15
+  value: 5

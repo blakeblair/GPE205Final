@@ -214,9 +214,9 @@ public class GameManager : MonoBehaviour
         material.SetColor("_Color", skill.TankColor);
     }
 
-    internal static void AddScore()
+    internal static void AddScore(int score)
     {
-        Instance.score++;
+        Instance.score += score;
         Instance.ScoreText.text = Instance.score.ToString();
         Instance.gameOverScoreText.text = Instance.score.ToString();
     }

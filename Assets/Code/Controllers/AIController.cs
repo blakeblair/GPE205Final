@@ -31,7 +31,7 @@ public class AIController : Controller
     private void OnDeath(TankPawn killer)
     {
         TankAudio.PlayDeathSound();
-        GameManager.AddScore();
+        GameManager.AddScore(Senses.Skill.value);
         Destroy(gameObject);
     }
 

@@ -13,4 +13,5 @@ public class AISkill : ScriptableObject
     public float detectionFov = 90f;
 
     public float FleeThreshold = 50f;
+    public int value = 1;
 }
