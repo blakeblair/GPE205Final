@@ -30,10 +30,10 @@ public class AIWaypointing : MonoBehaviour
         Pawn = GetComponent<TankPawn>();
     }
 
-    private void Update()
-    {
-        DrawDebug();
-    }
+    //private void Update()
+    //{
+    //    DrawDebug();
+    //}
 
     private void DrawDebug()
     {
@@ -114,6 +114,8 @@ public class AIWaypointing : MonoBehaviour
 
     public void MoveTowardsPositionIfFacing(Vector3 position)
     {
+        if (Pawn.Health.CurrentHealth <= 0) return;
+
         var direction = position - transform.position;
         var cross = Vector3.Cross(direction.normalized, transform.forward);
         bool facing = Senses.Facing(position, 90);
@@ -124,6 +126,8 @@ public class AIWaypointing : MonoBehaviour
 
     public void FaceTowardsPosition(Vector3 position)
     {
+        if (Pawn.Health.CurrentHealth <= 0) return;
+
         var direction = position - transform.position;
         var cross = Vector3.Cross(direction.normalized, transform.forward);
 

@@ -11,7 +11,6 @@ public class Controller : MonoBehaviour
 
     public int PlayerNumber;
 
-    public bool Dead;
 
     protected virtual void Awake()
     {

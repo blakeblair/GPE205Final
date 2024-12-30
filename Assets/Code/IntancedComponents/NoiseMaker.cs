@@ -29,16 +29,17 @@ public class NoiseMaker : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, volumeDistance);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        movingVolume = Mathf.Abs(tankMovement.MovementInput.y) * moveNoiseMultiplier;
-        rotatingVolume = Mathf.Abs(tankMovement.MovementInput.x) * rotateNoiseMultiplier;
+        movingVolume = Mathf.Abs(tankMovement.MovementInput.magnitude) * moveNoiseMultiplier;
+        rotatingVolume = Mathf.Abs(tankMovement.TurretInput.magnitude) * rotateNoiseMultiplier;
         shootingVolume = Mathf.Clamp(shootingVolume-0.1f, 0, shootingNoiseMultiplier);
-    }
 
-    internal void MakeNoise()
-    {
         float noiseVolume = movingVolume + rotatingVolume + shootingVolume;
-        volumeDistance = noiseVolume;
+        volumeDistance = Mathf.Lerp(volumeDistance,noiseVolume,Time.deltaTime);
+
+        //DebugPlus.LogOnScreen(tankMovement.MovementInput);
+        //DebugPlus.LogOnScreen(tankMovement.TurretInput);
+        //DebugPlus.LogOnScreen(volumeDistance);
     }
 }

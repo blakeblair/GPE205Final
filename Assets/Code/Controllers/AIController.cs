@@ -11,6 +11,7 @@ public class AIController : Controller
     public AISenses Senses;
     public TankPawn target;
     public AIWaypointing Waypointing;
+    public TankAudio TankAudio;
 
     public float lostSightTime;
     public float lostSightTimer;
@@ -19,10 +20,20 @@ public class AIController : Controller
 
     bool hasSight;
 
+
     protected override void Awake()
     {
         base.Awake();
+        TankAudio = GetComponent<TankAudio>();
+        pawn.Health.DeathEvent += OnDeath;
         InitStateMachine();
+    }
+
+    private void OnDeath(TankPawn killer)
+    {
+        TankAudio.PlayDeathSound();
+        GameManager.AddScore();
+        Destroy(gameObject);
     }
 
     private void Start()
@@ -36,13 +47,20 @@ public class AIController : Controller
         stateMachine = new StateMachine();
 
         State PatrolState = new PatrolState();
+        State FleeState = new FleeState();
 
         Transition hasTarget = new HasTargetEnoughHealth();
         hasTarget.NextState = new AttackState();
 
+        Transition hasTargetLow = new HasTargetLowHealth();
+        hasTargetLow.NextState = new FleeState();
+
+        Transition noTarget = new NoTarget();
+        noTarget.NextState = PatrolState;
+
 
         stateMachine.CurrentState = PatrolState;
-        PatrolState.transitions.Add(hasTarget);
+
 
         State FireState = new AttackState();
         hasTarget.NextState = FireState;
@@ -53,9 +71,17 @@ public class AIController : Controller
         Transition lostSight = new LostSight();
         lostSight.NextState = PatrolState;
 
+        Transition heardTarget = new HeardTarget();
+        heardTarget.NextState = FireState;
+
+        FleeState.transitions.Add(outsideRange);
 
         FireState.transitions.Add(outsideRange);
-        FireState.transitions.Add(lostSight); 
+        FireState.transitions.Add(lostSight);
+        FireState.transitions.Add(hasTargetLow);
+
+        PatrolState.transitions.Add(hasTarget);
+        PatrolState.transitions.Add(heardTarget);
     }
 
     public override void ProcessInputs()
@@ -65,19 +91,30 @@ public class AIController : Controller
 
     public void Transition(State state)
     {
+        if(state == null)
+        {
+            Debug.Log("wow");
+        }
         stateMachine.CurrentState = state;
         stateMachine.CurrentState.OnStateEnter(this);
     }
 
     private void Update()
     {
+        if (pawn.Health.CurrentHealth <= 0) return;
+
+        if (stateMachine.CurrentState == null)
+        {
+            Debug.LogError("Null state", gameObject);
+            return;
+        }
         stateMachine.CurrentState.EvaluateTransitions(this);
 
         stateMachine.Update(this);
 
 
-        DebugPlus.LogOnScreen("Current State: " + stateMachine.CurrentState.GetType());
-        DebugPlus.LogOnScreen("lostSightTimer: " + lostSightTimer);
+        //DebugPlus.LogOnScreen("Current State: " + stateMachine.CurrentState.GetType());
+        //DebugPlus.LogOnScreen("lostSightTimer: " + lostSightTimer);
     }
 
     public void LostSightUpdate()
@@ -138,18 +175,22 @@ public class AttackState : State
 
         controller.lostSightTimer = 0f;
 
-        if (controller.Senses.SensedEnemies.Count < 1)
-            return;
+        if (controller.Senses.SensedEnemies.Count > 0)
+        {
+            controller.target = controller.Senses.SensedEnemies[0];
+            controller.lastSeenPostion = controller.target.transform.position;
+        }
 
-        controller.target = controller.Senses.SensedEnemies[0];
-        controller.lastSeenPostion = controller.target.transform.position;
+        if(controller.Senses.HeardEnemies.Count > 0)
+        {
+            controller.target = controller.Senses.HeardEnemies[0];
+            controller.lastSeenPostion = controller.target.transform.position;
+        }
     }
 
     public override void OnStateUpdate(AIController controller)
     {
         base.OnStateUpdate(controller);
-
-        
 
         controller.Waypointing.SetDestination(controller.target.transform.position);
 
@@ -180,6 +221,32 @@ public class AttackState : State
 
 }
 
+public class FleeState : State
+{
+    public override void OnStateEnter(AIController controller)
+    {
+        base.OnStateEnter(controller);
+    }
+
+    public override void OnStateUpdate(AIController controller)
+    {
+        base.OnStateUpdate(controller);
+
+        if (controller.target == null) return;
+
+        var away = (controller.target.transform.position - controller.transform.position).normalized;
+        controller.Waypointing.SetDestination(away * 2.5f);
+    }
+
+    public override void OnStateExit(AIController controller)
+    {
+        base.OnStateExit(controller);
+
+        controller.target = null;
+    }
+
+}
+
 public class StateMachine
 {
     public State CurrentState;
@@ -194,7 +261,9 @@ public class HasTargetEnoughHealth : Transition
 {
     public override bool Evaluate(AIController controller)
     {
-        return controller.Senses.SensedEnemies.Count > 0 && controller.pawn.Health.CurrentHealth > controller.Senses.Skill.FleeThreshold;
+        var hasEnemy = controller.Senses.SensedEnemies.Count > 0 || controller.Senses.HeardEnemies.Count > 0;
+
+        return hasEnemy && controller.pawn.Health.CurrentHealth > controller.Senses.Skill.FleeThreshold;
     }
 }
 
@@ -202,7 +271,24 @@ public class HasTargetLowHealth : Transition
 {
     public override bool Evaluate(AIController controller)
     {
-        return controller.Senses.SensedEnemies.Count > 0 && controller.pawn.Health.CurrentHealth <= controller.Senses.Skill.FleeThreshold;
+        var hasEnemy = controller.Senses.SensedEnemies.Count > 0 || controller.Senses.HeardEnemies.Count > 0;
+        return hasEnemy && controller.pawn.Health.CurrentHealth <= controller.Senses.Skill.FleeThreshold;
+    }
+}
+
+public class NoTarget : Transition
+{
+    public override bool Evaluate(AIController controller)
+    {
+        return controller.Senses.SensedEnemies.Count < 1 && controller.Senses.HeardEnemies.Count < 1;
+    }
+}
+
+public class HeardTarget : Transition
+{
+    public override bool Evaluate(AIController controller)
+    {
+        return controller.Senses.HeardEnemies.Count > 0;
     }
 }
 
@@ -221,8 +307,7 @@ public class OutsideRange : Transition
         if (controller.target == null) return true;
 
         var dist = Vector3.Distance(controller.target.transform.position, controller.transform.position);
-        DebugPlus.LogOnScreen(dist);
-        return dist > controller.Senses.Skill.detectionRadius;
+        return dist > Mathf.Max(controller.Senses.Skill.sightRadius, controller.Senses.Skill.hearingRadius);
     }
 }
 

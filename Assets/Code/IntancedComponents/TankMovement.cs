@@ -45,7 +45,7 @@ public class TankMovement : Movement
         VerticalRotation();
         turret.rotation = Quaternion.RotateTowards(turret.rotation, pivot.rotation, pawn.Parameters.turretRotationSpeed * Time.deltaTime);
 
-        ClearInput();
+        //ClearInput();
     }
 
     private void ClearInput()

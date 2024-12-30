@@ -12,5 +12,5 @@ public class TankParameters : ScriptableObject
     public float hullRotationSpeed = 25;
     public float cameraSpeed = 10;
     public float turretRotationSpeed = 30;
-
+    public float knockBackForce = 100f;
 }

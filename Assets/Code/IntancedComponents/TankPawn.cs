@@ -13,9 +13,10 @@ using UnityEngine;
 public class TankPawn : Pawn
 {
     public TankParameters Parameters = null;
-
+    public NoiseMaker NoiseMaker;
     private void Awake()
     {
+        NoiseMaker = GetComponent<NoiseMaker>();
         Health = GetComponent<Health>();
         Shooter = GetComponent<TankShooter>();
         Movement = GetComponent<TankMovement>();

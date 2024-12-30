@@ -31,14 +31,21 @@ public class Bullet : MonoBehaviour
             health.OnDamageTaken(damage);
         }
 
-        if(bulletVFX)
+        if (bulletVFX)
             Instantiate(bulletVFX, transform.position, Quaternion.identity);
 
+        AddForce(other);
+
+        Destroy(gameObject);
+    }
+
+    private void AddForce(Collider other)
+    {
         var rb = other.GetComponent<Rigidbody>();
+        
+        if (rb == null) return;
 
         var dir = (other.transform.position - shotOrigin).normalized;
         rb.AddForce(dir * shotForce);
-
-        Destroy(gameObject);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class TankShooter : Shooter
@@ -25,5 +26,8 @@ public class TankShooter : Shooter
         newBullet.InitBullet(tankPawn, firePoint.forward);
         noiseMaker.shootingVolume = noiseMaker.shootingNoiseMultiplier;
         lastShootTime = Time.time;
+
+        GetComponent<Rigidbody>().AddForce(-transform.forward * tankPawn.Parameters.knockBackForce);
+
     }
 }

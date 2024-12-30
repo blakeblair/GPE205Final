@@ -5,7 +5,8 @@ public class AISkill : ScriptableObject
 {
     public TankParameters CustomParameters;
 
-    public float detectionRadius = 5f;
+    public float sightRadius = 5f;
+    public float hearingRadius = 15f;
     public float lostSightTime = 1f;
     public float detectionFov = 90f;
 

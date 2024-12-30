@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,9 +24,56 @@ public class GameManager : MonoBehaviour
     public Transform WaypointsRoot;
     public Transform[] Waypoints;
 
-    public AISkill[] Skills;
+    public List<AISkill> Skills;
+    public List<AISkill> SkillsPool;
 
     public TankParameters BaseTankParameters;
+
+    public int numEnemies;
+
+    bool GameStarted = false;
+    public Transform pawnRoot;
+
+    public List<TankPawn> AllPawns;
+
+    public int score;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI gameOverScoreText;
+    public TextMeshProUGUI healthText;
+
+    public int maxEnemies = 10;
+
+    public float spawnTimer;
+    public float spawnInterval = 10;
+
+    public GameObject gameOver;
+
+    private void Update()
+    {
+        if (!GameStarted) return;
+        SpawnTimerUpdate();
+
+        if(_controls.FindAction("Pause").WasPressedThisFrame())
+        {
+            if(GameStarted)
+            {
+                UI.Instance.PauseGame(!UI.IsPaused);
+            }
+        }
+    }
+
+    private void SpawnTimerUpdate()
+    {
+        spawnTimer -= Time.deltaTime;
+
+        if (spawnTimer < 0)
+        {
+            if (AllPawns.Count < maxEnemies)
+                SpawnRandomEnemy();
+
+            spawnTimer = spawnInterval;
+        }
+    }
 
     public Transform RandomWaypoint
     {
@@ -47,31 +97,81 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void Start()
+    public void StartGame()
     {
-        StartGame();
-    }
+        if (GameStarted) return;
+        
+        pawnRoot = new GameObject("PawnRoot").transform;
 
-    private void StartGame()
-    {
         var player = CreatePlayerPawn();
 
         player.transform.GetComponent<Rigidbody>().MovePosition(RandomWaypoint.position);
         player.transform.rotation = RandomWaypoint.rotation;
 
         player.SetParameters(BaseTankParameters);
-        
+
+        player.Health.HealthChanged += Health_HealthChanged;
+
+        healthText.text = player.Health.CurrentHealth.ToString();
         CameraManager.Instance.Attach(player);
 
-        var skill = Skills[UnityEngine.Random.Range(0, Skills.Length)];
-        var enemy = CreateEnemyPawn(skill);
+        player.transform.parent = pawnRoot;
 
-        enemy.transform.GetComponent<Rigidbody>().MovePosition(RandomWaypoint.position);
-        enemy.transform.rotation = RandomWaypoint.rotation;
-        if (skill.CustomParameters)
-            enemy.SetParameters(skill.CustomParameters);
-        else
-            enemy.SetParameters(BaseTankParameters);
+
+        GameStarted = true;
+    }
+
+    private void Health_HealthChanged(int health, TankPawn damager)
+    {
+        healthText.text = health.ToString();
+    }
+
+    public TankPawn SpawnRandomEnemy()
+    {
+        int iterations = 10;
+        int count = 0;
+
+        Transform spawn = null;
+        while (count < iterations) 
+        {
+            spawn = RandomWaypoint;
+
+            if (!Physics.CheckSphere(spawn.position, 3f, LayerMask.GetMask("Tank"), QueryTriggerInteraction.Ignore))
+            {
+                break;
+            }
+
+            count++;
+        }
+
+        var skill = Skills[UnityEngine.Random.Range(0, Skills.Count)];
+        var enemy = CreateEnemyPawn(skill);
+        enemy.transform.position = spawn.position;
+
+        return enemy;
+    }
+
+    public void EndGame()
+    {
+        AllPawns.Clear();
+        if(pawnRoot != null)
+        {
+            Destroy(pawnRoot.gameObject);
+        }
+
+        ShowGameOverScreen();
+        StartCoroutine(SwitchScene());
+    }
+
+    private void ShowGameOverScreen()
+    {
+        gameOver.SetActive(true);
+    }
+
+    IEnumerator SwitchScene()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene(0);
 
     }
 
@@ -80,7 +180,8 @@ public class GameManager : MonoBehaviour
         var tank = Instantiate(tankPrefab);
 
         tank.AddComponent<PlayerController>();
-    
+
+        AllPawns.Add(tank);
         return tank;    
     }
 
@@ -93,18 +194,21 @@ public class GameManager : MonoBehaviour
 
         senses.Skill = skill;
         tank.name = senses.Skill.name;
+        AllPawns.Add(tank);
+
+        if (skill.CustomParameters)
+            tank.SetParameters(skill.CustomParameters);
+        else
+            tank.SetParameters(BaseTankParameters);
+        tank.transform.parent = Instance.pawnRoot;
 
         return tank;
     }
 
-    public void GameOver(PlayerController playerController)
+    internal static void AddScore()
     {
-        
+        Instance.score++;
+        Instance.ScoreText.text = Instance.score.ToString();
+        Instance.gameOverScoreText.text = Instance.score.ToString();
     }
-
-    public void Respawn(Pawn pawn)
-    {
-        
-    }
-
 }

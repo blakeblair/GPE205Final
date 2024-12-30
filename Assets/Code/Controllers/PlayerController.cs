@@ -15,7 +15,13 @@ public class PlayerController : Controller
     protected override void Awake()
     {
         base.Awake();
+        pawn.Health.DeathEvent += OnDeath;
         TankMovement = GetComponent<TankMovement>();
+    }
+
+    private void OnDeath(TankPawn killer)
+    {
+        GameManager.Instance.EndGame();
     }
 
     public void TakeControl(Pawn controlledPawn, int playerNum = 0)
@@ -32,30 +38,10 @@ public class PlayerController : Controller
         Score += amount;
     }
 
-    public void Respawn()
-    {
-        Lives--;
-
-        if(Lives == 0)
-        {
-            pawn.Movement.enabled = false;
-            GameManager.Instance.GameOver(this);
-            return;
-        }
-
-        GameManager.Instance.Respawn(pawn);
-        pawn.Health.Heal(100);
-    }
-
     private void OnDestroy()
     {
         if (Cam != null)
             Cam.transform.parent = null;
-    }
-
-    private void OnDeath()
-    {
-        Respawn();
     }
 
     public void Update()
@@ -70,7 +56,7 @@ public class PlayerController : Controller
         var move = GameManager.Controls.FindAction("Move").ReadValue<Vector2>();
         var look = GameManager.Controls.FindAction("Look").ReadValue<Vector2>();
         
-        if (Dead)
+        if (pawn.Health.CurrentHealth <= 0)
         {
             move = Vector2.zero;
             look = Vector2.zero;
