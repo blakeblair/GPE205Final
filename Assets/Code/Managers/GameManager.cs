@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour
     public float spawnTimer;
     public float spawnInterval = 10;
 
+    public bool invertY;
+
+    public TankPawn playerPawn;
+
     public GameObject gameOver;
 
     private void Update()
@@ -116,7 +120,7 @@ public class GameManager : MonoBehaviour
         player.SetParameters(BaseTankParameters);
 
         player.Health.HealthChanged += Health_HealthChanged;
-
+        playerPawn = player;
         healthText.text = player.Health.CurrentHealth.ToString();
         CameraManager.Instance.Attach(player);
 
@@ -187,6 +191,8 @@ public class GameManager : MonoBehaviour
         var tank = Instantiate(tankPrefab);
 
         tank.AddComponent<PlayerController>();
+
+        tank.Movement.invertY = invertY;
 
         AllPawns.Add(tank);
         return tank;    

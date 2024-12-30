@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
-{ 
+{
+    public bool invertY = false;
+
     public abstract void HullMove(float vertical);
 
     public abstract void HullRotate(float horizontal);

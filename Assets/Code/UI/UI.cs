@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,17 +10,12 @@ public class UI : MonoBehaviour
 {
     public static UI Instance;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
-
     public AudioMixer audioMixer;
     public TextMeshProUGUI Title;
     public Button OptionsButton;
     public TextMeshProUGUI Options;
     public Button StartButton;
-    public TextMeshProUGUI Start;
+    public TextMeshProUGUI StartText;
     public Button ExitButton;
     public TextMeshProUGUI Exit;
     public Toggle YAxisInvert;
@@ -32,6 +28,28 @@ public class UI : MonoBehaviour
 
     public CanvasGroup canvasGroup;
     public static bool IsPaused = true;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        OnInvertToggleChanged(YAxisInvert.isOn);
+        YAxisInvert.onValueChanged.AddListener(OnInvertToggleChanged);
+    }
+
+    private void OnInvertToggleChanged(bool invert)
+    {
+        GameManager.Instance.invertY = invert;
+
+        if(GameManager.Instance.playerPawn)
+        {
+            GameManager.Instance.playerPawn.Movement.invertY = invert;
+        }
+    }
+
     public void ExitGame()
     {
         Application.Quit();

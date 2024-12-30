@@ -34,6 +34,9 @@ public class TankMovement : Movement
     }
     public override void TurretPitch(float vertical)
     {
+        if(invertY)
+            vertical = -vertical;
+
         this.TurretInput.y = vertical;
     }
     private void LateUpdate()

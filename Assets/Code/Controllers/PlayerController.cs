@@ -49,6 +49,17 @@ public class PlayerController : Controller
         if (pawn == null) return;
         ProcessInputs();
         
+        if(UI.IsPaused)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
     }
 
     public override void ProcessInputs()
