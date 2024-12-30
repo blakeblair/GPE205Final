@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     private int currentHealth = 100;
     public int MaxHealth = 100;
 
+    //PlayerController, TankPawn, and HUD are subscribed to events raised by Health
     public delegate void OnHealthChanged(int health, TankPawn damager);
     public event OnHealthChanged HealthChanged;
 
@@ -27,12 +28,14 @@ public class Health : MonoBehaviour
 
             currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
 
+            //if health has changed, raise the event
             if (currentHealth != oldHealth)
             {
                 HealthChanged?.Invoke(currentHealth, lastDamager);
                 Debug.Log(value + "damage taken! " + "Health: " + CurrentHealth);
             }
 
+            //if health has gone from above 0 to 0, raise the death event
             if (oldHealth > 0 && CurrentHealth <= 0)
             {
                 DeathEvent?.Invoke(lastDamager);

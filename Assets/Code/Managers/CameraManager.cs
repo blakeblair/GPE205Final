@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    //sets up player camera
     public static CameraManager Instance;
 
     public CinemachineVirtualCamera VirtualCamera;

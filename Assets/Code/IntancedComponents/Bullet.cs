@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
 
         if (bulletVFX)
             Instantiate(bulletVFX, transform.position, Quaternion.identity);
-
+        //knockback on hit
         AddForce(other);
 
         Destroy(gameObject);

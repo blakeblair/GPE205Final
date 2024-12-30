@@ -7,7 +7,7 @@ using static UnityEditor.Progress;
 public class PlayerController : Controller
 {
     public Vector3 currentAimPoint;
-    public int Lives { get; private set; } = 3;
+    //public int Lives { get; private set; } = 3;
     public Transform Cam { get; private set; }
 
     private TankMovement TankMovement;
@@ -26,8 +26,6 @@ public class PlayerController : Controller
 
     public void TakeControl(Pawn controlledPawn, int playerNum = 0)
     {
-        //Camera = playerNum == 0 ? GameManager.Instance.P1Camera.transform : GameManager.Instance.p2Camera.transform;
-
         pawn = controlledPawn;
 
         CameraManager.Instance.Attach(GetComponent<TankPawn>());

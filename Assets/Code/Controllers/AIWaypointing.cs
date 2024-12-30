@@ -117,6 +117,7 @@ public class AIWaypointing : MonoBehaviour
         if (Pawn.Health.CurrentHealth <= 0) return;
 
         var direction = position - transform.position;
+        //cross product consults demons to tell us which direction we are facing
         var cross = Vector3.Cross(direction.normalized, transform.forward);
         bool facing = Senses.Facing(position, 90);
 
@@ -129,13 +130,13 @@ public class AIWaypointing : MonoBehaviour
         if (Pawn.Health.CurrentHealth <= 0) return;
 
         var direction = position - transform.position;
+        //cross product makes up which direction we are facing and we just have to believe it
         var cross = Vector3.Cross(direction.normalized, transform.forward);
-
+        //move left or right based on this magic number
         if (cross.y < 0)
             Pawn.HullRotate(1f);
         else if (cross.y > 0)
             Pawn.HullRotate(-1f);
     }
-
-
+    
 }

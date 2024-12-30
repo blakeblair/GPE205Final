@@ -4,6 +4,7 @@ public abstract class State
 {
     public List<Transition> transitions = new List<Transition>();
 
+    //State availability is assessed on update, checking each transition for availability
     public bool EvaluateTransitions(AIController controller)
     {
         for(int i = 0; i < transitions.Count; i++)

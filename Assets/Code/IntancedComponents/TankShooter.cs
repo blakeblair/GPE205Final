@@ -31,6 +31,7 @@ public class TankShooter : Shooter
         noiseMaker.shootingVolume = noiseMaker.shootingNoiseMultiplier;
         lastShootTime = Time.time;
         tankAudio.PlayFireSound();
+        //recoil force opposite to the direction of the bullet
         rb.AddForce(-firePoint.forward * tankPawn.Parameters.knockBackForce);
 
     }

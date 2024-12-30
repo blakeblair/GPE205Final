@@ -2,6 +2,7 @@
 
 public class OutsideRange : Transition
 {
+    //for Flee and Attack states
     public override bool Evaluate(AIController controller)
     {
         if (controller.target == null) return true;

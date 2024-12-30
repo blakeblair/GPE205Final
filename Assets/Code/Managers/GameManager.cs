@@ -13,17 +13,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    //sets up the inputs from the new unity input system to be used by the game
     [SerializeField]
     private InputActionAsset _controls;
 
     [SerializeField]
     private TankPawn tankPrefab;
     
+    //accessor for the controls
     public static InputActionAsset Controls => Instance._controls;
-
+    
+    //Root holds all the waypoints, makes dragging in all waypoints easier in unity
     public Transform WaypointsRoot;
+    //array of all Patrol Points in the scene, populated at start
     public Transform[] Waypoints;
 
+    //AI Personalities
     public List<AISkill> Skills;
 
     public TankParameters BaseTankParameters;
@@ -40,11 +45,14 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverScoreText;
     public TextMeshProUGUI healthText;
 
+    //max number of enemies that can exist simultaneously
     public int maxEnemies = 10;
 
+    //time between enemy spawn attempts
     public float spawnTimer;
     public float spawnInterval = 10;
 
+    //the most important bool in the game
     public bool invertY;
 
     public TankPawn playerPawn;
@@ -71,6 +79,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //timer
+    //attempts to spawn enemy tanks on a timer, restricted by maxEnemies
     private void SpawnTimerUpdate()
     {
         spawnTimer -= Time.deltaTime;
@@ -84,6 +94,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //returns a random Patrol Point
     public Transform RandomWaypoint
     {
         get
@@ -96,6 +107,11 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         _controls.Enable();
+        PopulateWaypoints();
+    }
+
+    private void PopulateWaypoints()
+    {
         Waypoints = new Transform[WaypointsRoot.childCount];
         int index = 0;
         foreach(Transform t in WaypointsRoot)
@@ -103,7 +119,6 @@ public class GameManager : MonoBehaviour
             Waypoints[index] = t;
             index++;
         }
-        
     }
 
     public void StartGame()
@@ -119,7 +134,7 @@ public class GameManager : MonoBehaviour
 
         player.SetParameters(BaseTankParameters);
 
-        player.Health.HealthChanged += Health_HealthChanged;
+        player.Health.HealthChanged += OnPlayerHealthChanged;
         playerPawn = player;
         healthText.text = player.Health.CurrentHealth.ToString();
         CameraManager.Instance.Attach(player);
@@ -129,8 +144,9 @@ public class GameManager : MonoBehaviour
 
         GameStarted = true;
     }
-
-    private void Health_HealthChanged(int health, TankPawn damager)
+    
+    //Updates HUD
+    private void OnPlayerHealthChanged(int health, TankPawn damager)
     {
         healthText.text = health.ToString();
     }
@@ -144,7 +160,7 @@ public class GameManager : MonoBehaviour
         while (count < iterations) 
         {
             spawn = RandomWaypoint;
-
+            //checks spawnpoint for preexisting occupant before allowing a new tank to spawn
             if (!Physics.CheckSphere(spawn.position, 3f, LayerMask.GetMask("Tank"), QueryTriggerInteraction.Ignore))
             {
                 break;
@@ -152,7 +168,7 @@ public class GameManager : MonoBehaviour
 
             count++;
         }
-
+        //for now enemies are random, but this could be updated to increase difficulty of enemies as the game progresses
         var skill = Skills[UnityEngine.Random.Range(0, Skills.Count)];
         var enemy = CreateEnemyPawn(skill);
         enemy.transform.position = spawn.position;
@@ -177,15 +193,17 @@ public class GameManager : MonoBehaviour
         gameOver.SetActive(true);
     }
 
+    //shows game over screen for 5 seconds before returning to main menu
     IEnumerator SwitchScene()
     {
         Debug.Log("Waiting..");
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(0);
         Debug.Log("Switch!");
 
     }
 
+    //similar to my previous spawner adding components at runtime, allows modular changes to spawnable tanks later
     public TankPawn CreatePlayerPawn()
     {
         var tank = Instantiate(tankPrefab);
@@ -219,6 +237,7 @@ public class GameManager : MonoBehaviour
         return tank;
     }
 
+    //sets the color of the tank based on personality
     private void SetMaterial(TankPawn tank, AISkill skill)
     {
         var material = tank.GetComponentInChildren<SkinnedMeshRenderer>().material;

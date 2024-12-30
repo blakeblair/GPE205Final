@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
+    //applies a random boost to player speed, health, or damage on collision, randomizes respawn time
     public enum PowerupType
     {
         Speed,

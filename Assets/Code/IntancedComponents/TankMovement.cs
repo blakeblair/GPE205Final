@@ -34,6 +34,7 @@ public class TankMovement : Movement
     }
     public override void TurretPitch(float vertical)
     {
+        //that important bool is here
         if(invertY)
             vertical = -vertical;
 
@@ -41,36 +42,23 @@ public class TankMovement : Movement
     }
     private void LateUpdate()
     {
+        //More Math D:< Move the Tank
         transform.position = transform.position + transform.forward * MovementInput.y * pawn.Parameters.hullMoveSpeed * Time.deltaTime;
         transform.Rotate(Vector3.up * MovementInput.x * pawn.Parameters.hullRotationSpeed * Time.deltaTime);
 
-        RotatePivot();
-        VerticalRotation();
+        HorizontalCameraRotation();
+        VerticalCameraRotation();
+        //Gradually rotate towards the camera's rotation
         turret.rotation = Quaternion.RotateTowards(turret.rotation, pivot.rotation, pawn.Parameters.turretRotationSpeed * Time.deltaTime);
-
-        //ClearInput();
+        
     }
 
-    private void ClearInput()
-    {
-        TurretInput = new Vector2();
-        MovementInput = new Vector2();
-    }
-
-    public void RotatePivot()
+    public void HorizontalCameraRotation()
     {
         pivot.transform.Rotate(Vector3.up * TurretInput.x * pawn.Parameters.cameraSpeed * Time.deltaTime);
-
-        //float angle = turret.transform.localEulerAngles.y;
-        //if (angle > 180)
-        //{
-        //    angle -= 360;
-        //}
-        //angle = Mathf.Clamp(angle, -turretRotationLimit, turretRotationLimit);
-        //turret.transform.localEulerAngles = new Vector3(0, angle, 0);
     }
 
-    private void VerticalRotation()
+    private void VerticalCameraRotation()
     {
 
         pivot.transform.rotation *= Quaternion.AngleAxis(TurretInput.y * pawn.Parameters.cameraSpeed * Time.deltaTime, Vector3.right);
@@ -80,6 +68,7 @@ public class TankMovement : Movement
 
         var x = angles.x;
 
+        //clamp angles
         if (x > 180 && x < 340)
         {
             x = 340;

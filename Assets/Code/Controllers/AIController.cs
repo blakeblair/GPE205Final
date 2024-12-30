@@ -42,7 +42,8 @@ public class AIController : Controller
         Senses = GetComponent<AISenses>();
 
     }
-
+    //Each AITank has an AIController that has a StateMachine,
+    //this avoids the complexity of one state machine handling all the AI tanks like in the previous project
     private void InitStateMachine()
     {
         stateMachine = new StateMachine();
@@ -95,7 +96,8 @@ public class AIController : Controller
     {
         if(state == null)
         {
-            Debug.Log("wow");
+            Debug.Log("uh oh no state available");
+            return;
         }
         stateMachine.CurrentState = state;
         stateMachine.CurrentState.OnStateEnter(this);
@@ -122,7 +124,7 @@ public class AIController : Controller
     public void LostSightUpdate()
     {
         lostSightTimer += Time.deltaTime;
-
+        //lostSightTime is a personality variable for AI tanks, some tanks will give up quicker than others
         if(lostSightTimer > Senses.Skill.lostSightTime)
         {
             if(hasSight == true)
@@ -135,6 +137,7 @@ public class AIController : Controller
 
     private void OnLostSight()
     {
+        //saves the position at which the AI last saw the player, allowing it to go to that position before resuming patrol state
         lastSeenPostion = target.transform.position;
     }
 

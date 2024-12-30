@@ -49,6 +49,8 @@ public class AISenses : MonoBehaviour
         return false;
     }
 
+    //foreach
+    //continue prevents AI attacking each other
     private void UpdateHearing()
     {
         HeardEnemies.Clear();
@@ -127,8 +129,8 @@ public class AISenses : MonoBehaviour
 
         return ray && hit.collider == col;
     }
-
-    //If transform.forward is facing fov degress of position
+    
+    //dot product is evil math that tells us how much two vectors are facing each other
     public bool Facing(Vector3 position, float fov)
     {
         var dir = (position - transform.transform.position).normalized;
