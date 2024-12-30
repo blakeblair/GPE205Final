@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public Transform[] Waypoints;
 
     public List<AISkill> Skills;
-    public List<AISkill> SkillsPool;
 
     public TankParameters BaseTankParameters;
 
@@ -51,11 +50,17 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (!GameStarted) return;
+
         SpawnTimerUpdate();
 
-        if(_controls.FindAction("Pause").WasPressedThisFrame())
+        Pause();
+    }
+
+    private void Pause()
+    {
+        if (_controls.FindAction("Pause").WasPressedThisFrame())
         {
-            if(GameStarted)
+            if (GameStarted)
             {
                 UI.Instance.PauseGame(!UI.IsPaused);
             }
