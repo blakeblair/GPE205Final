@@ -14,6 +14,8 @@ public class TankPawn : Pawn
 {
     public TankParameters Parameters = null;
     public NoiseMaker NoiseMaker;
+
+    public GameObject explosion;
     private void Awake()
     {
         NoiseMaker = GetComponent<NoiseMaker>();
@@ -26,6 +28,14 @@ public class TankPawn : Pawn
     {
         Health.CurrentHealth = Parameters.MaxHealth;
         Health.MaxHealth = Parameters.MaxHealth;
+
+        Health.DeathEvent += Explosion;
+    }
+
+    private void Explosion(TankPawn killer)
+    {
+        Instantiate(explosion);
+        explosion.transform.position = transform.position;
     }
 
     private void OnDestroy()

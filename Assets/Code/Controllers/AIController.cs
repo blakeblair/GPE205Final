@@ -19,7 +19,6 @@ public class AIController : Controller
 
     bool hasSight;
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -30,9 +29,11 @@ public class AIController : Controller
 
     private void OnDeath(TankPawn killer)
     {
-        TankAudio.PlayDeathSound();
         GameManager.AddScore(Senses.Skill.value);
-        Destroy(gameObject);
+        Waypointing.enabled = false;
+        pawn.Movement.enabled = false;
+        Senses.enabled = false;
+        Destroy(gameObject, 2.0f);
     }
 
     private void Start()

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletrb: {fileID: 4320699788478842396}
   velocity: 20
-  bulletVFX: {fileID: 0}
+  bulletVFX: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
   lifeTime: 5
 --- !u!54 &4320699788478842396
 Rigidbody:
