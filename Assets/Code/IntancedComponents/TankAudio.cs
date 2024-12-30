@@ -12,7 +12,7 @@ public class TankAudio : MonoBehaviour
     public AudioClip shootClip;
 
     public float moveNoiseThresholdMax = 2f;
-
+    public float maxMovingVolume = 0.75f;
     private void Awake()
     {
         noiseMaker = GetComponent<NoiseMaker>();
@@ -29,6 +29,6 @@ public class TankAudio : MonoBehaviour
 
     private void Update()
     {
-        MovingSource.volume = Mathf.Lerp(MovingSource.volume, noiseMaker.movingVolume, Time.deltaTime);
+        MovingSource.volume = Mathf.Lerp(MovingSource.volume, Mathf.Min(noiseMaker.movingVolume, maxMovingVolume), Time.deltaTime);
     }
 }

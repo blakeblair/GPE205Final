@@ -1114,6 +1114,7 @@ MonoBehaviour:
   cameraFollow: {fileID: 6680771980531036270}
   Parameters: {fileID: 0}
   NoiseMaker: {fileID: 0}
+  explosion: {fileID: 0}
 --- !u!114 &2674148309981655580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1148,6 +1149,7 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: 1ca22212bb08d034fbd045fe7e92c34a, type: 3}
   shootClip: {fileID: 8300000, guid: 5c422a219204028488c28bc0eb399910, type: 3}
   moveNoiseThresholdMax: 2
+  maxMovingVolume: 0.5
 --- !u!4 &8433864929308899551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1377736229043773446, guid: deb1630f9ec160049ac09de6bdc0dc35, type: 3}

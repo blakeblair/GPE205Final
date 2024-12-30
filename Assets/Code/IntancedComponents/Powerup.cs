@@ -33,7 +33,7 @@ public class Powerup : MonoBehaviour
         switch (type)
         {
             case PowerupType.Speed:
-                material.SetColor("_Color", Color.blue);
+                material.SetColor("_Color", Color.cyan);
                 break;
             case PowerupType.Health:
                 material.SetColor("_Color", Color.green);
