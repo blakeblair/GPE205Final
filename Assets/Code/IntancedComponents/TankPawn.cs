@@ -22,6 +22,12 @@ public class TankPawn : Pawn
         Movement = GetComponent<TankMovement>();
     }
 
+    private void Start()
+    {
+        Health.CurrentHealth = Parameters.MaxHealth;
+        Health.MaxHealth = Parameters.MaxHealth;
+    }
+
     private void OnDestroy()
     {
         if (Parameters)

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd495fcc009e53a4e90ef54a60c212e9, type: 3}
   m_Name: Enemy Tank
   m_EditorClassIdentifier: 
-  MaxHealth: 30
-  ShotDamage: 10
+  MaxHealth: 75
+  ShotDamage: 20
   ShootFrequency: 1.5
   ShotForce: 5
   hullMoveSpeed: 1

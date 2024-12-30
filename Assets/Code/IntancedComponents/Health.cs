@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
         {
             return currentHealth;
         }
-        private set
+        set
         {
             int oldHealth = currentHealth;
             currentHealth = value;
@@ -42,11 +42,6 @@ public class Health : MonoBehaviour
                 Debug.Log("Dead!");
             }
         }
-    }
-
-    private void Start()
-    {
-        currentHealth = MaxHealth;
     }
 
     public void OnDamageTaken(int damage)

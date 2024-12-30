@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a8cf4db3b7db3249ac66c757dd7a6d1, type: 3}
-  m_Name: Generic Enemy
+  m_Name: Fast Enemy
   m_EditorClassIdentifier: 
-  TankColor: {r: 1, g: 0.4669811, b: 0.70903474, a: 0}
-  CustomParameters: {fileID: 11400000, guid: 7481f0bd96ab3014eb52dd2844e70f02, type: 2}
-  sightRadius: 5
-  hearingRadius: 15
-  lostSightTime: 5
+  TankColor: {r: 0.08962262, g: 1, b: 0.1050061, a: 0}
+  CustomParameters: {fileID: 11400000, guid: 164047f50bdcf6a4dab9bcede39cb1aa, type: 2}
+  sightRadius: 15
+  hearingRadius: 30
+  lostSightTime: 15
   detectionFov: 90
-  FleeThreshold: 15
+  FleeThreshold: 0
