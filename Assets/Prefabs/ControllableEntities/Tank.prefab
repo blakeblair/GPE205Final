@@ -1113,8 +1113,8 @@ MonoBehaviour:
   cameraLookAt: {fileID: 6407212146349378435}
   cameraFollow: {fileID: 6680771980531036270}
   Parameters: {fileID: 0}
-  NoiseMaker: {fileID: 0}
-  explosion: {fileID: 0}
+  NoiseMaker: {fileID: 2674148309981655580}
+  explosion: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
 --- !u!114 &2674148309981655580
 MonoBehaviour:
   m_ObjectHideFlags: 0
